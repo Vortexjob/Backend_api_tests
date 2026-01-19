@@ -5,6 +5,23 @@ GRPC_OPTIONS = [
     ('grpc.keepalive_timeout_ms', 10000)
 ]
 
+# ===== НАСТРОЙКИ ПОДКЛЮЧЕНИЯ ДЛЯ IPC СЕРВИСА =====
+IPC_GRPC_SERVER_URL = 'localhost:1111'  
+IPC_GRPC_OPTIONS = [
+    ('grpc.enable_http_proxy', 0),
+    ('grpc.keepalive_timeout_ms', 10000),
+    ('grpc.keepalive_time_ms', 30000),
+    ('grpc.keepalive_permit_without_calls', True),
+    ('grpc.http2.max_pings_without_data', 0),
+    ('grpc.http2.min_time_between_pings_ms', 10000),
+    ('grpc.http2.min_ping_interval_without_data_ms', 300000),
+    ('grpc.max_connection_idle_ms', 30000),
+    ('grpc.max_connection_age_ms', 300000),
+]
+
+# ===== НАСТРОЙКИ ПОДКЛЮЧЕНИЯ ДЛЯ ADMIN API =====
+ADMIN_API_URL = 'http://192.168.190.46:55556'
+
 # ===== КОДЫ ЗАПРОСОВ =====
 CODE_CREATE_TRANSFER = "MAKE_BANK_CLIENT_TRANSFER"
 CODE_CONFIRM_TRANSFER = "CONFIRM_TRANSFER"
@@ -19,13 +36,16 @@ CODE_MAKE_MOI_DOM_PAYMENT = "MAKE_MOI_DOM_PAYMENT"
 CODE_MAKE_QR_PAYMENT = "MAKE_QR_PAYMENT"
 CODE_MAKE_SWIFT_TRANSFER = "MAKE_SWIFT_TRANSFER"
 CODE_MAKE_DEPOSIT = "MAKE_DEPOSIT"
+CODE_DIGITAL_LOAN_APPLY = "DIGITAL_LOAN_APPLY"
+CODE_DIGITAL_LOAN_CHECK_SERVICE = "DIGITAL_LOAN_CHECK_SERVICE"
 
 # ===== НАСТРОЙКИ УСТРОЙСТВА =====
 DEVICE_TYPE = 'ios'
 USER_AGENT = '12; iPhone12MaxProDan'
 
 # ===== ДАННЫЕ СЕССИИ =====
-SESSION_KEY = '7C17ZJOKrOlYPvkoeQ835L'  # TODO: Заполнить session key
+SESSION_KEY = '7C17ZJOKrOlYPvkoeQ835L'  # TODO: Заполнить session key для gRPC переводов
+ADMIN_SESSION_KEY = '3hOHJw2PlhKYtOeM1QsrLR'  # Session key для Admin API
 
 # ===== OTP КОД =====
 OTP_CODE = "111111"  # TODO: Заполнить OTP код

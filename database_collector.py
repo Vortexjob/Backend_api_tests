@@ -57,12 +57,13 @@ class DataCollector:
         except Exception as e:
             raise Exception(f"Ошибка при получении данных: {str(e)}")
 
-    def get_valid_session_key(self, user_id: int = 134) -> str:
+    def get_valid_session_key(self, user_id: int = 134, offset: int = 0) -> str:
         """
         Получает валидный сессионный ключ для пользователя
         
         Args:
             user_id: ID пользователя (по умолчанию 134)
+            offset: Смещение для выбора ключа (0 = первый, 1 = второй, и т.д.)
             
         Returns:
             str: Сессионный ключ или None если не найден
@@ -75,8 +76,8 @@ class DataCollector:
                         FROM sessions 
                         WHERE user_id = %s AND is_valid = true
                         ORDER BY created_at DESC
-                        LIMIT 1
-                    """, (user_id,))
+                        LIMIT 1 OFFSET %s
+                    """, (user_id, offset))
                     result = cur.fetchone()
                     
                     if result:

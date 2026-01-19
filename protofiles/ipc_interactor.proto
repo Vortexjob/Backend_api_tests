@@ -1,0 +1,860 @@
+syntax = "proto3";
+
+package internal_ipc_interactor;
+
+service InternalIpcInteractor{
+
+  //IPC Back services. URL: https://10.100.101.126:8443/issuingws/services/Issuing
+  //карта клиента по номеру счета
+  rpc listCardsByAccount (ListCardsByAccountRequest) returns (ListCardsByAccountResponse) {}
+  //все карты клиента по номеру карты (любой)
+  rpc listAccountsByCard (ListAccountsByCardRequest) returns (ListAccountsByCardResponse) {}
+  //Подключение или отключение карты к интернет оплате
+  rpc editCard (EditCardRequest) returns (EditCardResponse) {}
+  rpc addCardToStop (AddCardToStopRequest) returns (AddCardToStopResponse) {}
+  rpc removeCardFromStop (RemoveCardFromStopRequest) returns (RemoveCardFromStopResponse) {}
+  // Получение имени картодержателя по PAN (Elcard)
+  rpc getCardholderNameByPan (GetCardholderNameByPanRequest) returns (GetCardholderNameByPanResponse) {}
+
+  // New IPC Services for get Balance and get Statement URL(https://10.100.100.103:6677)
+  // get balance
+  rpc getCardAccountsBalance (GetCardAccountsBalanceRequest) returns (GetCardAccountsBalanceResponse) {}
+  //get statements
+  rpc getTransactions (GetTransactionsRequest) returns (GetTransactionsResponse) {}
+  rpc assignPin (AssignPinRequest) returns (AssignPinResponse) {}
+  rpc unblockCard (UnblockCardRequest) returns (UnblockCardResponse){}
+
+  // Custom method to get card, account and balance info and etc
+  rpc addCardInfoByAccId (AddCardPanByAccIdRequest) returns (AddCardPanByAccIdResponse) {}
+  rpc syncCardData (SyncCardDataRequest) returns (SyncCardDataResponse) {}
+  rpc getCardAccountsBalanceByAccountNo (GetCardAccountsBalanceByAccountNoRequest) returns (GetCardAccountsBalanceResponse) {}
+  rpc getCardBalance (GetCardBalanceRequest) returns (GetCardAccountsBalanceResponse) {}
+  rpc getTransactionsByAccId (GetTransactionsRequestByAccId) returns (GetTransactionsResponse) {}
+  rpc cardCreditSecondStepByAccId (CardCreditSecondStepRequestByAccId) returns (CardCreditSecondStepResponse) {}
+  rpc cardDebitSecondStepByAccId (CardDebitSecondStepRequestByAccId) returns (CardDebitSecondStepResponse) {}
+  rpc getCardPanByAccIdD (GetCardPanByAccIdDRequest) returns (GetCardPanByAccIdDResponse) {}
+
+  rpc addCardToStopByAccId (AddCardToStopByAccIdRequest) returns (AddCardToStopResponse) {}
+  rpc removeCardFromStopByAccId (RemoveCardFromStopByAccIdRequest) returns (RemoveCardFromStopResponse) {}
+
+  // IPC FRONT Services URL(https://10.100.100.103:7777)
+  // Пополнение карты первый шаг
+  rpc cardCreditFirstStep (Empty) returns (CardCreditFirstStepResponse) {}
+  // Пополнение карты второй шаг
+  rpc cardCreditSecondStep (CardCreditSecondStepRequest) returns (CardCreditSecondStepResponse) {}
+  // Дебитование карты первый шаг
+  rpc cardDebitFirstStep (Empty) returns (CardDebitFirstStepResponse) {}
+  // Дебитование карты второй шаг
+  rpc cardDebitSecondStep (CardDebitSecondStepRequest) returns (CardDebitSecondStepResponse) {}
+  // Отмена дебитования/кредитования карты первый шаг
+  rpc reverseCardCreditOrDebitFirstStep (Empty) returns (ReverseCardCreditOrDebitFirstStepResponse) {}
+  // Отмена дебитования/кредитования карты второй шаг
+  rpc reverseCardCreditOrDebitSecondStep (ReverseCardCreditOrDebitSecondStepRequest) returns (ReverseCardCreditOrDebitSecondStepResponse) {}
+  // Функционал с смс уведомлениями
+  // Регистрация
+  rpc registrationOfNewCardToSmsService (RegistrationOfNewCardToSmsServiceRequest) returns (SmsServiceResponse){}
+  rpc registrationOfAnotherBaseCardToSmsService (RegistrationOfAnotherBaseCardToSmsServiceRequest) returns (SmsServiceResponse){}
+  rpc registrationOfSuppCardToSmsService (RegistrationOfSuppCardToSmsServiceRequest) returns (SmsServiceResponse){}
+  // Активация/деактивация
+  rpc configureIpcSmsNotifications (ConfigureSmsNotificationsRequest) returns (SmsServiceResponse){}
+  // Переводы с карты на карты чужого банка, для реверса используем методы reverseCardCreditOrDebitFirstStep и reverseCardCreditOrDebitSecondStep
+  rpc makeCardToCardPaymentFirstStep (Empty) returns (MakeCardToCardPaymentFirstStepResponse) {}
+  rpc makeCardToCardPaymentSecondStep (MakeCardToCardPaymentSecondStepRequest) returns (MakeCardToCardPaymentSecondStepResponse) {}
+  rpc queryCardInfo (QueryCardInfoRequest) returns (QueryCardInfoResponse) {}
+  rpc getCvv2(GetCvv2Request) returns (GetCvv2Response) {}
+
+}
+
+message Error {
+  string code = 1;
+  string data = 2;
+}
+
+message ResponseCode {
+  string responseCode = 1;
+}
+
+message Empty {
+
+}
+///////////////////////////////////////////////////////////////////////////////////////////
+// IPC OLD
+message ListCardsByAccountRequest {
+  string accountNo = 1;
+  string ccy = 2;
+}
+message ListCardsByAccountResponse {
+  bool success = 1;
+  repeated CardDetails data = 2;
+  Error error = 3;
+}
+
+message CardDetails {
+  string accountNo = 1;
+  string cardAcct = 2; // Card account (primary account)
+  string ccy = 3; // currency
+  string card = 4; // Card number (PAN)
+  string baseSupp = 5; //Base (1) or supplementary (2) card // не нужен
+  string status = 6; // Card status (0 – active, 2 – closed, 1 – not active)
+  string status2 = 7; //? Status of the second card (0 – active, 2 – closed, 1 – not active).
+  string stopCause = 8; // Card stop cause
+  string expiry = 9; // Expiry date of the card
+  string expiry2 = 10; // Expiry date of the second card
+  string condSet = 11; // Card condition set
+  string riskLevel = 12; // Risk level
+  string clientId = 13; // Cardholder’s internal identifier
+  string clRole = 14; // Cardholder’s role (1 – account owner, 2 – card holder)
+  string agreementKey = 15; // Agreement’s internal identifier
+  string cardName = 16; // Name on card
+  string bankC = 17; // Bank - row owner code
+  string groupc = 18; // // Card group code - local for each bank
+  string icoExport = 19;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+message ListAccountsByCardRequest {
+  string cardNo = 1;
+}
+message ListAccountsByCardResponse {
+  bool success = 1;
+  repeated FullCardDetails data = 2;
+  Error error = 3;
+}
+
+
+message FullCardDetails{
+  string card = 1; // Card number (PAN)
+  string status = 2; //Card status. 0 - Active [default], 1 - Suspended, 2 - Closed
+  string statusChangeDate = 3; // Date the card status was last changed
+  string clientB = 4; // Client code
+  string cardType = 5; // Card type. 01 - Debit, 02 - Credit, 03 - Charge
+  string product = 6; // Product code
+  string clientId = 7;
+  string cardName = 8; // Cardholder’s name on card
+  string bankCode = 9; // Bank code – for agreement
+  string branch = 10; // Branch code
+  string office = 11; // Office code
+  string bBrId = 12; // Branch ID
+  string officeId = 13; // Office ID
+  string agreNom = 14; // Internal agreement number
+  string clAcctKey = 15; // Internal account group number
+  string bankC = 16; // Bank - row owner code
+  string groupc = 17; // Card group code - local for each bank
+  string accountNo = 18; // Internal account number
+  string cardAcct = 19; // Card account number
+  string ccy = 20;
+  string cAccntType = 21; // Account type. 00 - Default, 10 - Deposit
+  string clStatus = 22; // Client status. 10 - Active, 20 - Inactive, 30 - Suspended, 40 - Closed
+  string issueDate = 23; // Card issue date
+  string password = 24; // Card password
+  string cvv2 = 25; // Card verification value 2
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+
+message EditCardRequest {
+  string cardNo = 1;
+  string riskLevel = 2;
+  // RISK_LEVEL TABLE
+  // Card type				        CCY		Activate	Deactivate
+  //
+  // MasterCard Standard		  KGS		I_MSK		S_MSK
+  // MasterCard Standard		  USD		I_MSU		S_MSU
+  // MasterCard Standard		  EUR		I_MSE		S_MSE
+  // MasterCard Business		  KGS		I_MBK		S_MBK
+  // MasterCard Business		  USD		I_MBU		S_MBU
+  // MasterCard Business	  	EUR		I_MBE		S_MBE
+  // MasterCard Gold			    KGS		IA_KG		Ad_KG
+  // MasterCard Gold			    USD		IA_US		Ad_US
+  // MasterCard Gold			    EUR		IA_EU		Ad_EU
+  // Visa Infinite			      KGS		VIKGE		VIKG
+  // Visa Infinite			      USD		VIUSE		VIUS
+  // Visa Electron			      KGS		I_VE		S_VE
+  // Visa Electron		      	USD		I_VEU		S_VEU
+  // Visa Classic			        KGS		I_VC		S_VC
+  // Visa Classic			        USD		I_VCU		S_VCU
+  // Visa Gold			        	KGS		IA_KG		Ad_KG
+  // Visa Gold			        	USD		IA_US		Ad_US
+  // UPI Classic Individual	  KGS		I_UC		S_UC
+  // UPI Classic Individual 	USD		I_UCU		S_UCU
+  // UPI Classic Corporate  	KGS		I_UC		S_UC
+  // UPI Classic Corporate  	USD		I_UCU		S_UCU
+  // UPI Gold Individual		  KGS		I_UG		S_UG
+  // UPI Gold Individual	  	USD		I_UGU		S_UGU
+  // UPI Gold Corporate		    KGS		I_UG		S_UG
+  // UPI Gold Corporate		    USD		I_UGU		S_UGU
+  // Elcard					          KGS		E_Int		A
+  // Elcard					          USD		E_Int		A
+}
+message EditCardResponse {
+  bool success = 1;
+  ResponseCode data = 2;
+  Error error = 3;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+message AddCardToStopRequest {
+  string cardNo = 1;
+  string text = 2;  //block reason, max length = 30 chars
+  string stopCause = 3; // block reason: F, G, J, L, C or 5
+  //    F - Fraud suspect – заблокирована по подозрению в проведении мошеннических операций по карте (детали можно узнать в РМ УБК).
+  //    G - Technical Overdraft – технический овердрафт.
+  //    J - Overdraft overdue – карта заблокирована по причине просроченной оплаты по разрешенному овердрафту. Ручному разблокированию не подлежит!
+  //    L - lost/seized by ATM - заблокирована по утере/краже.
+  //    C - Court/tax resolution - заблокирована по постановлению суда. Разблокированию по заявлению клиента не подлежит, только по постановлению суда и пр.!
+  //    5 – Blocked by Bank - заблокирована по любой другой причине.
+}
+message AddCardToStopResponse {
+  bool success = 1;
+  ResponseCode data = 2;
+  Error error = 3;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+message RemoveCardFromStopRequest {
+  string cardNo = 1;
+  string text = 2;  //block reason, max length = 30 chars
+  string stopCause = 3; // block reason: F, G, J, L, C or 5
+  //    F - Fraud suspect – заблокирована по подозрению в проведении мошеннических операций по карте (детали можно узнать в РМ УБК).
+  //    G - Technical Overdraft – технический овердрафт.
+  //    J - Overdraft overdue – карта заблокирована по причине просроченной оплаты по разрешенному овердрафту. Ручному разблокированию не подлежит!
+  //    L - lost/seized by ATM - заблокирована по утере/краже.
+  //    C - Court/tax resolution - заблокирована по постановлению суда. Разблокированию по заявлению клиента не подлежит, только по постановлению суда и пр.!
+  //    5 – Blocked by Bank - заблокирована по любой другой причине.
+}
+message RemoveCardFromStopResponse {
+  bool success = 1;
+  ResponseCode data = 2;
+  Error error = 3;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+// IPC NEW
+message GetCardAccountsBalanceRequest {
+  string cardNo = 1;
+  string ccy = 2;
+}
+
+message GetCardAccountsBalanceByAccountNoRequest {
+  string accountNo = 1;
+  string ccy = 2;
+  string ipcCardBaseSupp = 3;
+}
+
+message GetCardAccountsBalanceResponse {
+  bool success = 1;
+  repeated CardAccountBalanceInfo data = 2;
+  Error error = 3;
+}
+
+message CardAccountBalanceInfo {
+  CardInfo cardInfo = 1;
+  AccountInfo accountInfo = 2;
+  BalanceInfo balanceInfo = 3;
+}
+
+message CardInfo {
+  string institutionId = 1;
+  string primaryAccountNumber = 2; // PAN, card number
+  string effectiveDate = 3; // Special field for Amex - date in which card becomes valid; Can be null
+  string updateDate = 4;
+  string prefixNumber = 5;
+  string expiry = 6;
+  string cardSequenceNumber = 7;
+  string cardholderId = 8;
+  string nameOnCard = 9;
+  string cardholderPassword = 10;
+  string accountRestrictionsFlag = 11;
+  string commissionGroup = 12;
+  string cardUserId = 13;
+  string additionalInfo = 14;
+  string riskGroup = 15;
+  string riskGroup2 = 16;
+  repeated CardStatuses statuses = 17;
+  string expiryInIsoFormat = 18;
+  string convertedCardPan = 19;
+  string convertedMaskedCardPan = 20;
+  string expiryWithSlash = 21;
+  bool isInetPaymentsActivated = 22;
+  string expiry2 = 23;
+}
+
+message CardStatuses {
+  string type = 1;
+  string actionCode = 2;
+  string actionDescription = 3;
+  string effectiveDate = 4;
+  string customStatus = 5;
+}
+
+message AccountInfo {
+  string institutionId = 1;
+  string accountId = 2;
+  string bankAccountId = 3;
+  string currency = 4;
+  string cardholderId = 5;
+  string effectiveDate = 6;
+  string updateDate = 7;
+  string accountType = 8;
+  string initialAmount = 9;
+  string lockedBackofficeAmount = 10;
+  string lockTime = 11;
+  string shadowAmount = 12;
+  string commissionGroup = 13;
+  string priority = 14;
+  string status = 15;
+  string availableAmount = 16;
+}
+
+message  BalanceInfo {
+  string currency = 1;
+  string initialAmount = 2;
+  string bonusAmount = 3;
+  string creditLimit = 4;
+  string lockedBackofficeAmount = 5;
+  string lockedBackofficeAmountOffline = 6;
+  string lockedAmount = 7;
+  string availableAmount = 8;
+  string ccy = 9;
+  string convertedInitialAmount = 10;
+  string convertedAvailableAmount = 11;
+  string convertedBonusAmount = 12;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+message GetTransactionsRequest {
+  string cardNo = 1;
+  string listStartDate = 2; //Дата начала интервала (по умолчанию – дата окончания списка минус 15 дней)
+  string listEndDate = 3; //Дата окончания интервала (по умолчанию – текущая дата и время)
+}
+message GetTransactionsResponse {
+  bool success = 1;
+  TransactionDetails data = 2;
+  Error error = 3;
+}
+
+message TransactionDetails {
+  string listStartDate = 1; // выборка транзакций, начало
+  string listEndDate = 2; // выборка транзакций, конец
+  string listSize = 3; // количество транзакций в ответе
+  repeated Transaction transaction = 4;
+}
+
+message Transaction {
+  string eventUniqueId = 1;
+  string institutionId = 2; // KICB
+  string requestDate = 3;
+  string updateDate = 4;
+  string cardType = 5; // 09
+  string deviceType = 6;
+  string messageTypeIdentifier = 7;
+  string riskGroup = 8;
+  string reversed = 9;
+  string commissionGroup = 10;
+  string primaryAccountNumber = 11;
+  string processingCode = 12;
+  string transactionAmount = 13;
+  string billingAmount = 14;
+  string transmissionDateTime = 15;
+  string billingConversionRate = 16;
+  string systemTraceAuditNumber = 17;
+  string localTransactionDateTime = 18;
+  string cardExpiry = 19;
+  string pointOfServiceDataCode = 20;
+  string cardSequenceNumber = 21;
+  string functionCode = 22;
+  string acceptorBusinessCode = 23;
+  string reconciliationDate = 24;
+  string reconciliationId = 25;
+  string acquirerId = 26;
+  string forwarderId = 27;
+  string retrievalReferenceNumber = 28;
+  string approvalCode = 29;
+  string actionCode = 30;
+  string acceptorId = 31;
+  string acceptorNameLocation = 32;
+  string fees = 33;
+  string transactionCurrency = 34;
+  string billingCurrency = 35;
+  string additionalAmounts = 36;
+  string dataRecord = 37;
+  string destinationInstitutionId = 38;
+  string originatorInstitutionId = 39;
+  string issuerReferenceData = 40;
+  string receivingInstitutionId = 41;
+  string accountId1 = 42;
+  string convertedTransactionAmount = 44;
+  string convertedBillingAmount = 45;
+  string transactionCcy = 46;
+  string billingCcy = 47;
+  string convertedAcceptorNameLocation = 48;
+  string txnPaymentType = 49;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+// IPC FRONT
+message PaymentId {
+  string paymentId = 1;
+}
+message CardCreditFirstStepResponse {
+  bool success = 1;
+  PaymentId data = 2;
+  Error error = 3;
+}
+
+message CardCreditSecondStepRequest {
+  string paymentId = 1;  // paymentId полученный с первого запроса
+  string cardNo = 2;     // в документации написано pan, номер карты
+  string expiry = 3;     // дата истечения срока карты
+  string amount = 4;     // пополняемая сумма
+  string ccy = 5;    // код валюты
+}
+message CardCreditSecondStepResponse {
+  bool success = 1;
+  CardCreditObject data = 2;
+  Error error = 3;
+}
+
+message CardCreditObject {
+  string paymentId = 1;
+  string pan = 2;
+  string expiry = 3;
+  string amount = 4;
+  string ccyCode = 5;
+  string merchantId = 6; // название мечанта(ibank - WSIB01)
+  string internalPanMasked = 7;
+  string pointCode = 8;
+  string amountFld004 = 9;
+  string acqInst = 10;
+  string authActionCode = 11;
+  string authApprCode = 12;
+  string authRefNumber = 13;
+  string authStan = 14;
+  string authTime = 15;
+  string cardType = 16;
+  string fld046Resp = 17;
+  string fld072 = 18;
+  string issRefData = 19;
+  string mcc = 20;
+  string merchantName = 21;
+  string stipClientId = 22;
+  string authActionCodeFinal = 23;
+  string cardSeqNumber = 24;
+  string reconcileInfo = 25;
+  string authRowNumb1 = 26;
+  string transactionAmount = 27;
+  string cardholderAmount = 28;
+  string cardholderCcyCode = 29;
+  string conversionRate = 30;
+  string authMsgRef1 = 31;
+  string clearedCcy = 32;
+  string clearedAmount = 33;
+  string availableCcy = 34;
+  string availableAmount = 35;
+  string overdraftCcy = 36;
+  string overdraftAmount = 37;
+  string clearedAfterCcy = 38;
+  string clearedAfterAmount = 39;
+  string availableAfterCcy = 40;
+  string availableAfterAmount = 41;
+  string overdraftAfterCcy = 42;
+  string overdraftAfterAmount = 43;
+  string action = 44;
+  bool hasErrorCode = 45;
+  string errorCode = 46;
+}
+
+message CardDebitFirstStepResponse {
+  bool success = 1;
+  PaymentId data = 2;
+  Error error = 3;
+}
+
+message CardDebitSecondStepRequest {
+  string paymentId = 1;  // paymentId полученный с первого запроса
+  string cardNo = 2;     // в документации написано pan, номер карты
+  string expiry = 3;     // дата истечения срока карты
+  string amount = 4;     // пополняемая сумма
+  string ccy = 5;    // код валюты
+
+}
+message CardDebitSecondStepResponse {
+  bool success = 1;
+  CardDebitObject data = 2;
+  Error error = 3;
+}
+
+message CardDebitObject  {
+  string paymentId = 1; // ID платежа
+  string pointCode = 2;
+  string pan = 3; // Card Number
+  string expiry = 4; // Expiry date of card
+  string amount = 5;
+  string ccyCode = 6; // Код валюты
+  string merchantId = 7;
+  string internalPanMasked = 8;
+  string amountFld004 = 9;
+  string acqInst = 10;
+  string authActionCode = 11; // код успешности действия, если 000 - то успешен
+  string authApprCode = 12;
+  string authRefNumber = 13;
+  string authStan = 14;
+  string authTime = 15;
+  string cardType = 16;
+  string fld046Resp = 17;
+  string fld072 = 18;
+  string issRefData = 19;
+  string mcc = 20;
+  string merchantName = 21;
+  string stipClientId = 22;
+  string authActionCodeFinal = 23;
+  string cardSeqNumber = 24;
+  string reconcileInfo = 25;
+  string authRowNumb1 = 26; // код для вставки  при отмене кредитования или дебитования
+  string transactionAmount = 27;
+  string cardholderAmount = 28;
+  string cardholderCcyCode = 29;
+  string conversionRate = 30;
+  string authMsgRef1 = 31;
+  string clearedCcy = 32;
+  string clearedAmount = 33;
+  string availableCcy = 34;
+  string availableAmount = 35;
+  string overdraftCcy = 36;
+  string overdraftAmount = 37;
+  string clearedAfterCcy = 38;
+  string clearedAfterAmount = 39;
+  string availableAfterCcy = 40;
+  string availableAfterAmount = 41;
+  string overdraftAfterCcy = 42;
+  string overdraftAfterAmount = 43;
+  string action = 44;
+  bool hasErrorCode = 45;
+  string errorCode = 46;
+}
+
+message ReverseCardCreditOrDebitFirstStepResponse {
+  bool success = 1;
+  PaymentId data = 2;
+  Error error = 3;
+}
+
+message ReverseCardCreditOrDebitSecondStepRequest {
+  string paymentId = 1;
+  string authRowNumb1 = 2;
+}
+
+message ReverseCardCreditOrDebitSecondStepResponse {
+  bool success = 1;
+  ReverseCardCreditOrDebitObject data = 2;
+  Error error = 3;
+}
+
+message ReverseCardCreditOrDebitObject {
+  string paymentId = 1;
+  string authActionCode = 2;
+  string authRowNumb1 = 3;
+  string remainingAmount = 4;
+  string amountFld004 = 5;
+  string authActionCodeFinal = 6;
+  string rbTime = 7;
+  string refundedAmount = 8;
+  string clearedCcy = 9;
+  string clearedAmount = 10;
+  string availableCcy = 11;
+  string availableAmount = 12;
+  string overdraftCcy = 13;
+  string overdraftAmount = 14;
+  string clearedAfterCcy = 15;
+  string clearedAfterAmount = 16;
+  string availableAfterCcy = 17;
+  string availableAfterAmount = 18;
+  string overdraftAfterCcy = 19;
+  string overdraftAfterAmount = 20;
+  string action = 21;
+  bool hasErrorCode = 22;
+  string errorCode = 23;
+}
+
+message GetCardBalanceRequest {
+  int32 accountId = 1;
+}
+
+
+message CardDebitSecondStepRequestByAccId {
+  string paymentId = 1;  // paymentId полученный с первого запроса
+  int32 accountId = 2;     // в документации написано pan, номер карты
+  string amount = 4;     // пополняемая сумма
+  string ccy = 5;    // код валюты (KGS – 417; USD – 840; EUR – 978;)
+
+}
+
+
+message CardCreditSecondStepRequestByAccId {
+  string paymentId = 1;  // paymentId полученный с первого запроса
+  int32 accountId = 2;     // в документации написано pan, номер карты
+  string amount = 3;     // пополняемая сумма
+  string ccy = 4;    // код валюты (KGS – 417; USD – 840; EUR – 978;)
+
+}
+
+message GetCardPanByAccIdDRequest {
+  int32 accountId = 1;
+}
+
+message GetCardPanByAccIdDResponse {
+  bool success = 1;
+  GetCardPanByAccIdDObj data = 2;
+  Error error = 3;
+}
+
+message GetCardPanByAccIdDObj {
+  string cardPan = 1;
+  string expiry = 2;
+  string ccy = 3;
+}
+
+message GetTransactionsRequestByAccId {
+  string accountId = 1;
+  string listStartDate = 2; //Дата начала интервала (по умолчанию – дата окончания списка минус 15 дней)
+  string listEndDate = 3; //Дата окончания интервала (по умолчанию – текущая дата и время)
+}
+
+
+message AddCardPanByAccIdRequest {
+  int32 accountId = 1;
+  string baseSupp = 2;
+}
+
+message AddCardPanByAccIdResponse {
+  bool success = 1;
+  AddCardPanByAccIdResponseObj data = 2;
+  Error error = 3;
+}
+
+message AddCardPanByAccIdResponseObj {
+  int32 accountId = 1;
+}
+
+
+message AddCardToStopByAccIdRequest {
+  int32 accountId = 1;
+  string text = 2;  //block reason, max length = 30 chars
+  string stopCause = 3; // block reason: F, G, J, L, C or 5
+}
+
+message RemoveCardFromStopByAccIdRequest {
+  int32 accountId = 1;
+  string text = 2;  //block reason, max length = 30 chars
+  string stopCause = 3; // block reason: F, G, J, L, C or 5
+}
+
+message SyncCardDataRequest {
+  string accountNo = 1;
+}
+
+message CardAccId {
+  string id = 1;
+}
+message SyncCardDataResponse {
+  bool success = 1;
+  repeated CardAccId data = 2;
+  Error error = 3;
+}
+
+
+// Функционал с смс уведомлениями
+// Общий респонс для всех запросов, так как МПЦ кроме статуса 200 и пустой строки ничего не возвращает.
+// Респонс будем памить, если статус 200, то responseCode = 1. Если статус != 200, то 0
+message SmsServiceResponse {
+  bool success = 1;
+  ResponseCode data = 2;
+  Error error = 3;
+}
+
+
+// Регистрация карты в СМС сервисе МПЦ
+message RegistrationOfNewCardToSmsServiceRequest{
+  string cardholderId = 1;
+  string cardholderName = 2;
+  string smsPreferedLanguage = 3;
+  string cardPan = 4;
+  string cardExpiry = 5;
+  string accountNo = 6;
+  string smsPhoneNumber = 7; //should start with +996
+}
+
+message RegistrationOfAnotherBaseCardToSmsServiceRequest {
+  string cardholderId = 1;
+  string cardholderName = 2;
+  string cardPan = 3;
+  string cardExpiry = 4;
+  string accountNo = 5;
+}
+
+message RegistrationOfSuppCardToSmsServiceRequest {
+  string cardholderId = 1;
+  string cardPan = 2;
+  string cardExpiry = 3;
+  string accountNo = 4;
+}
+
+// Активация/деактивация СМС уведомлений
+message ConfigureSmsNotificationsRequest {
+  string cardholderId = 1;
+  string state = 2;
+  string cardPan = 3;
+  string cardExpiry = 4;
+}
+
+// Установка пин кода
+message AssignPinRequest {
+  string cardPan = 1;
+  string cardExpiry = 2;
+  string encryptedCardPin = 3;
+}
+
+message AssignPinResponse {
+  bool success = 1;
+  AssignPinResponseObj data = 2;
+  Error error = 3;
+}
+
+message AssignPinResponseObj {
+  string responseCode = 1;
+  string approvalCode = 2;
+  string systemsTraceAuditNumber = 3;
+  string transmissionDateTime = 4;
+  string transactionDateTime = 5;
+  string acquirerId = 6;
+  string terminalId = 7;
+}
+
+// Разблокировка карты
+message UnblockCardRequest {
+  string cardNo = 1;
+  string cardExpiry = 2;
+}
+
+message UnblockCardResponse {
+  bool success = 1;
+  UnblockCardResponseObj data = 2;
+  Error error = 3;
+}
+
+message UnblockCardResponseObj{
+  string responseCode = 1;
+}
+
+message GetCardholderNameByPanRequest {
+  string cardPan = 1;
+}
+
+message GetCardholderNameByPanResponse {
+  bool success = 1;
+  GetCardholderNameByPanObj data = 2;
+  Error error = 3;
+}
+
+message GetCardholderNameByPanObj {
+  string cardPan = 1;
+  string cardholderName = 2;
+}
+
+
+
+message MakeCardToCardPaymentFirstStepResponse {
+  bool success = 1;
+  PaymentId data = 2;
+  Error error = 3;
+}
+
+message MakeCardToCardPaymentSecondStepRequest {
+  string paymentId = 1;  // paymentId полученный с первого запроса
+  string debitCardPan = 2;     // в документации написано pan, номер карты
+  string debitExpiry = 3;     // дата истечения срока карты, 4 chars (2309)
+  string debitAmount = 4;     // дебитуемая сумма
+  string debitCcy = 5;    // код валюты, 3 chars (KGS)
+  string creditCardPan = 6;
+}
+
+message MakeCardToCardPaymentSecondStepResponse {
+  bool success = 1;
+  CardToCardPayObj data = 2;
+  Error error = 3;
+}
+
+message CardToCardPayObj {
+  string paymentId = 1;
+  string pointCode = 2;
+  string terminalId = 3;
+  string pan = 4;
+  string expiry = 5;
+  string pan2 = 6;
+  string expiry2 = 7;
+  string amount = 8;
+  string ccyCode = 9;
+  string internalPanMasked = 10;
+  string internalPan2Masked = 11;
+  string authActionCode = 12;
+  string authActionCodeFinal = 13;
+  string authRefNumber = 14;
+  string authStan = 15;
+  string authTime = 16;
+  string stipClientId = 17;
+  string cardType = 18;
+  string merchantName = 19;
+  string acqInst = 20;
+  string reconcileInfo = 21;
+  string authRowNumb1 = 22;
+  string issRefData = 23;
+  string transactionAmount = 24;
+  string cardholderAmount = 25;
+  string cardholderCcyCode = 26;
+  string conversionRate = 27;
+  string fld046Resp = 28;
+  string authApprCode = 29;
+  string authActionCode2 = 30;
+  string authTime2 = 31;
+  string authApprCode2 = 32;
+  string authRefNumber2 = 33;
+  string authRowNumb3 = 34;
+  string action = 35;
+  bool hasErrorCode = 36;
+  string errorCode = 37;
+}
+
+message QueryCardInfoRequest {
+	string card = 1;
+}
+
+message QueryCardInfo {
+	string sequenceNr = 1;
+}
+
+message QueryCardInfoResponse {
+	bool success = 1;
+	QueryCardInfo data = 2;
+	Error error = 3;
+}
+
+message GetCvv2Request {
+  string cardPan = 1;
+  string cardExpiry = 2;
+}
+
+message GetCvv2Response {
+  bool success = 1;
+  Cvv2 data = 2;
+  Error error = 3;
+}
+
+message Cvv2 {
+  string cardSecurityCode = 1;
+}
