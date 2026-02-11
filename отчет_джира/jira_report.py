@@ -2,12 +2,18 @@
 Сбор баглистов (тип задачи «Баг») за выбранный месяц из Jira
 и всех их сабтасков с выгрузкой в Excel.
 
-Конфигурация: config.json (jira_base_url, jira_email, jira_api_token, month).
-Месяц в формате YYYY-MM (например 2025-01). Меняешь месяц в конфиге — получаешь отчёт за другой период.
+Конфигурация: config.json (jira_base_url, jira_email, month, project).
+Токен Jira: в .env (JIRA_API_TOKEN). См. .env.example.
+Месяц в формате YYYY-MM (например 2025-01).
 """
 
 import json
 import os
+
+from dotenv import load_dotenv
+
+# Токен берётся из .env (не коммитится)
+load_dotenv(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".env"))
 import calendar
 import re
 from datetime import datetime, timedelta, time
@@ -39,13 +45,20 @@ def load_config():
     if not os.path.exists(path):
         raise FileNotFoundError(
             f"Файл конфигурации не найден: {path}\n"
-            "Создайте config.json с полями: jira_base_url, jira_email, jira_api_token, month"
+            "Создайте config.json с полями: jira_base_url, jira_email, month, project. "
+            "Токен — в .env (JIRA_API_TOKEN)."
         )
     with open(path, "r", encoding="utf-8") as f:
         cfg = json.load(f)
-    for key in ("jira_base_url", "jira_email", "jira_api_token", "month"):
+    for key in ("jira_base_url", "jira_email", "month"):
         if key not in cfg or not str(cfg[key]).strip():
             raise ValueError(f"В config.json должно быть заполнено поле: {key}")
+    token = os.environ.get("JIRA_API_TOKEN", "").strip() or (cfg.get("jira_api_token") or "").strip()
+    if not token:
+        raise ValueError(
+            "Jira API-токен не задан. Добавьте JIRA_API_TOKEN в файл .env (см. .env.example)."
+        )
+    cfg["jira_api_token"] = token
     # Нормализуем URL (без слэша в конце)
     cfg["jira_base_url"] = str(cfg["jira_base_url"]).rstrip("/")
     # Проект — обязателен, иначе в выборку попадают задачи из всех проектов
