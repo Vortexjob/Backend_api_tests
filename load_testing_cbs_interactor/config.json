@@ -1,0 +1,33 @@
+{
+  "grpc_server_url": "newibanktest.kicb.net:443",
+  "grpc_options": [
+    ["grpc.enable_http_proxy", 0],
+    ["grpc.keepalive_timeout_ms", 10000]
+  ],
+  "session_key": "08wLaBvbFTvewUkcvIdG29",
+  "session_id": "75gvd205QDoxshYmVpqVfn",
+  "otp": "111111",
+  "device_type": "IB-ANDROID",
+  "user_agent": "12; iPhone12MaxProDan",
+  "request_code": "MAKE_TXN_SHOP_OPERATION",
+  "num_threads": 5,
+  "num_requests_per_thread": 10,
+  "wait_for_response": false,
+  "deposit_request": {
+    "depositType": "S",
+    "depositId": 1,
+    "mainIntType": "B",
+    "amount": "10000",
+    "ccy": "KGS",
+    "rate": "12.5",
+    "termOfDeposit": "24",
+    "accountDebitId": 17980,
+    "accountIdDebit": 17980,
+    "amountDebit": "10000",
+    "productType": "makeDepositApplication",
+    "childName": "",
+    "childBirthdate": "",
+    "files": [],
+    "valueDate": "2025.07.29"
+  }
+}
