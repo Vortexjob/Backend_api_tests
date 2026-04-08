@@ -211,6 +211,10 @@ SWIFT_COMMISSION_TYPE = "OUR"
 SWIFT_COMMISSION_ACCOUNT_ID = str(ACCOUNT_ID_DEBIT)
 
 # ===== ДАННЫЕ ДЛЯ СОЗДАНИЯ ДЕПОЗИТА =====
+DEPOSIT_CUSTOMER_NO = "00909465"  # номер клиента (тестовый контур)
+# Счёт списания: ibank.accounts — KGS current, is_default (проверено запросом к БД)
+DEPOSIT_ACCOUNT_ID_DEBIT = 18361
+DEPOSIT_ACCOUNT_NO_DEBIT = "1280016059314604"
 DEPOSIT_TYPE = "Savings deposit"  # TODO: Заполнить тип депозита
 DEPOSIT_ID = 1531  # TODO: Заполнить ID депозита
 DEPOSIT_MAIN_INT_TYPE = "B"  # Тип начисления процентов

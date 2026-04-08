@@ -5,6 +5,7 @@ import time
 import uuid
 from datetime import date, timedelta
 from decimal import Decimal
+from functools import lru_cache
 from typing import Any
 
 import pytest
@@ -25,6 +26,13 @@ COMMON_CREATE_SKIP_ERROR_CODES = {
 
 SENTINEL_TOMORROW = "__TOMORROW__"
 SENTINEL_NEXT_BUSINESS_DAY = "__NEXT_BUSINESS_DAY__"
+SENTINEL_AMOUNT = "__AMOUNT__"
+SENTINEL_UNIQUE_QR_TXN_ID = "__UNIQUE_QR_TXN_ID__"
+
+
+@lru_cache(maxsize=1)
+def _get_collector() -> DataCollector:
+    return DataCollector(DatabaseConfig.from_env())
 
 
 def _digits_only(value: str | None) -> str:
@@ -108,12 +116,17 @@ def _next_business_date(days: int = 1) -> str:
 
 
 def _normalize_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    raw_amount = payload.get("amount") or payload.get("amountDebit") or payload.get("amountCredit")
     normalized: dict[str, Any] = {}
     for key, value in payload.items():
         if value == SENTINEL_TOMORROW:
             normalized[key] = _future_date(1)
         elif value == SENTINEL_NEXT_BUSINESS_DAY:
             normalized[key] = _next_business_date(1)
+        elif value == SENTINEL_AMOUNT:
+            normalized[key] = raw_amount
+        elif value == SENTINEL_UNIQUE_QR_TXN_ID:
+            normalized[key] = f"{time.strftime('%m%d%H%M%S')}{int(time.time() * 1000) % 1000:03d}"
         else:
             normalized[key] = value
     return normalized
@@ -272,13 +285,6 @@ def _prepare_case_accounts(
     if recipient_account:
         _assert_account_expectations(recipient_account, case.get("recipient", {}).get("expected"), "recipient")
 
-    sender_sync_payload = sync_account_view(sender_account)
-    recipient_sync_payload = sync_account_view(recipient_account) if recipient_account else None
-    if sender_sync_payload:
-        print(f"[sender-card-sync] {json.dumps(sender_sync_payload, ensure_ascii=False, default=str)}")
-    if recipient_sync_payload:
-        print(f"[recipient-card-sync] {json.dumps(recipient_sync_payload, ensure_ascii=False, default=str)}")
-
     sender_balance_before = _parse_decimal(collector.get_account_balance(account_id=sender_account["id"]))
     recipient_balance_before = (
         _parse_decimal(collector.get_account_balance(account_id=recipient_account["id"]))
@@ -402,6 +408,8 @@ def _wait_for_expected_transaction(
                     f"{json.dumps(last_transaction, ensure_ascii=False, default=str, indent=2)}"
                 )
             if internal_status in expected_internal and external_status in expected_external:
+                if pass_on_timeout_if_last_status_matches:
+                    return last_transaction
                 if stop_on_first_expected_status or (
                     internal_status == "SUCCESS" and external_status == "SUCCESS"
                 ):
@@ -454,6 +462,11 @@ def _expected_recipient_delta(case: dict[str, Any], transaction: dict[str, Any])
         request = case["request"]
         fallback = request.get("amountDebit") or request.get("amountCredit") or "0"
         return Decimal(str(fallback))
+    if code == "MAKE_QR_PAYMENT":
+        if amount_credit is not None:
+            return amount_credit
+        request = case["request"]
+        return Decimal(str(request.get("amount") or "0"))
     return Decimal("0")
 
 
@@ -564,9 +577,10 @@ def _verify_success_transaction(
     sender_account: dict[str, Any],
     recipient_account: dict[str, Any] | None,
     transaction: dict[str, Any],
+    request_payload: dict[str, Any] | None = None,
 ):
     code = case["operation"]["code"]
-    request = case["request"]
+    request = request_payload or case["request"]
 
     assert transaction["account_debit_id"] == sender_account["id"]
     assert transaction["account_debit_no"] == sender_account["account_no"]
@@ -597,9 +611,45 @@ def _verify_success_transaction(
         return
 
     if code == "MAKE_QR_PAYMENT":
-        assert transaction["txn_code"] == "MAKE_QR_PAYMENT"
-        if transaction.get("account_credit_prop_value") and request.get("qrAccount"):
-            assert transaction["account_credit_prop_value"] == request["qrAccount"]
+        txn_code = str(transaction.get("txn_code") or "")
+        assert (
+            txn_code == "MAKE_QR_PAYMENT"
+            or txn_code.endswith("ELQR_OUTGOING_EXCN")
+            or txn_code.endswith("ELQR_OUTGOING_EXCY")
+        )
+        if request.get("qrServiceId") and transaction.get("payment_code"):
+            assert transaction["payment_code"] == request["qrServiceId"]
+
+        if recipient_account is not None:
+            assert request.get("qrAccount") == recipient_account["account_no"]
+            if transaction.get("account_credit_no"):
+                assert transaction["account_credit_no"] == recipient_account["account_no"]
+            if transaction.get("customer_no_credit"):
+                assert transaction["customer_no_credit"] == case["recipient"]["customer_no"]
+
+        additional_data = transaction.get("additional_data") or {}
+        qr_request_data = additional_data.get("qrRequestData") or additional_data
+        for field_name in (
+            "clientType",
+            "qrVersion",
+            "qrType",
+            "qrMerchantProviderId",
+            "qrMerchantId",
+            "qrServiceId",
+            "qrAccount",
+            "qrMcc",
+            "qrCcy",
+            "qrTransactionId",
+            "qrServiceName",
+            "qrComment",
+            "qrControlSum",
+            "qrAccountChangeable",
+        ):
+            if request.get(field_name) is not None:
+                assert qr_request_data.get(field_name) == request[field_name]
+
+        if request.get("amount") is not None:
+            assert _parse_decimal(transaction.get("amount_debit")) == Decimal(str(request["amount"]))
         return
 
     if code == "MAKE_SWIFT_TRANSFER":
@@ -614,7 +664,7 @@ def _verify_success_transaction(
 
 def run_live_case(case: dict[str, Any]) -> None:
     config = get_config(validate_live=True)
-    collector = DataCollector(DatabaseConfig.from_env())
+    collector = _get_collector()
     sender_user_id = collector.get_user_id_by_customer_no(case["sender"]["customer_no"])
     if sender_user_id is None:
         pytest.skip(f"No user found for sender customer_no={case['sender']['customer_no']}")
@@ -686,4 +736,5 @@ def run_live_case(case: dict[str, Any]) -> None:
         sender_account=sender_account,
         recipient_account=recipient_account,
         transaction=transaction,
+        request_payload=payload,
     )

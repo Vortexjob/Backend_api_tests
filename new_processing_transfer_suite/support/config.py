@@ -7,6 +7,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 SUITE_ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_IBANK_HOST = "newibankdevcorp.kicb.net"
 load_dotenv(SUITE_ROOT / ".env")
 load_dotenv()
 
@@ -25,8 +26,29 @@ def _env_int(name: str, default: int) -> int:
     return int(value)
 
 
+def _env_str(name: str) -> str | None:
+    value = os.getenv(name)
+    if value is None:
+        return None
+    normalized = value.strip()
+    return normalized or None
+
+
 def live_mode_enabled() -> bool:
     return _env_flag("RUN_LIVE_NEW_PROCESSING", False)
+
+
+def _default_ibank_host() -> str:
+    value = _env_str("IBANK_HOST") or DEFAULT_IBANK_HOST
+    return value.rstrip("/")
+
+
+def _default_grpc_server_url() -> str:
+    return _env_str("GRPC_SERVER_URL") or f"{_default_ibank_host()}:443"
+
+
+def _default_admin_api_url() -> str:
+    return _env_str("ADMIN_API_URL") or f"https://{_default_ibank_host()}"
 
 
 @dataclass(frozen=True)
@@ -75,8 +97,8 @@ class AppConfig:
 def get_config(*, validate_live: bool | None = None) -> AppConfig:
     config = AppConfig(
         run_live_new_processing=live_mode_enabled(),
-        grpc_server_url=os.getenv("GRPC_SERVER_URL"),
-        admin_api_url=os.getenv("ADMIN_API_URL"),
+        grpc_server_url=_default_grpc_server_url(),
+        admin_api_url=_default_admin_api_url(),
         admin_session_key=os.getenv("ADMIN_SESSION_KEY"),
         db_host=os.getenv("DB_HOST"),
         db_port=os.getenv("DB_PORT"),
@@ -87,10 +109,10 @@ def get_config(*, validate_live: bool | None = None) -> AppConfig:
         otp_code=os.getenv("OTP_CODE", "111111"),
         device_type=os.getenv("DEVICE_TYPE", "ios"),
         user_agent=os.getenv("USER_AGENT", "12; iPhone12MaxProDan"),
-        session_retry_limit=_env_int("SESSION_RETRY_LIMIT", 10),
-        poll_interval_seconds=_env_int("POLL_INTERVAL_SECONDS", 2),
-        balance_sync_timeout_seconds=_env_int("BALANCE_SYNC_TIMEOUT_SECONDS", 90),
-        transaction_timeout_seconds=_env_int("TRANSACTION_TIMEOUT_SECONDS", 90),
+        session_retry_limit=_env_int("SESSION_RETRY_LIMIT", 5),
+        poll_interval_seconds=_env_int("POLL_INTERVAL_SECONDS", 1),
+        balance_sync_timeout_seconds=_env_int("BALANCE_SYNC_TIMEOUT_SECONDS", 30),
+        transaction_timeout_seconds=_env_int("TRANSACTION_TIMEOUT_SECONDS", 30),
         grpc_options=(
             ("grpc.enable_http_proxy", 0),
             ("grpc.keepalive_timeout_ms", 10000),

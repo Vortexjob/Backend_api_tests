@@ -1,0 +1,2619 @@
+[
+  {
+    "name": "bank_client_same_currency_current_to_card_by_account",
+    "enabled": true,
+    "selection_limit": 2,
+    "route_key": "TEMPLATE:MAKE_BANK_CLIENT_TRANSFER:SAME:ACCOUNT_NO:CURRENT->CARD",
+    "operation": {
+      "code": "MAKE_BANK_CLIENT_TRANSFER"
+    },
+    "coverage": {
+      "family": "bank_client",
+      "transfer_mode": "same_currency",
+      "shape": "a2c",
+      "provider_relation": "not_applicable",
+      "credit_addressing_mode": "ACCOUNT_NO"
+    },
+    "force_active": false,
+    "sender_selector": {
+      "customer_nos": [
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "0"
+      ],
+      "account_kind": "CURRENT",
+      "require_valid_session": true,
+      "min_balance": "1.00",
+      "prefer_default": true
+    },
+    "request": {
+      "accountCreditPropType": "ACCOUNT_NO",
+      "amountDebit": "1.00",
+      "paymentPurpose": "Template bank client same_currency current to card by account"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "recipient_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": false,
+      "min_balance": "1.00",
+      "prefer_default": true
+    },
+    "match_currency": true
+  },
+  {
+    "name": "bank_client_same_currency_current_to_card_by_card_no",
+    "enabled": true,
+    "selection_limit": 2,
+    "route_key": "TEMPLATE:MAKE_BANK_CLIENT_TRANSFER:SAME:CARD_NO:CURRENT->CARD",
+    "operation": {
+      "code": "MAKE_BANK_CLIENT_TRANSFER"
+    },
+    "coverage": {
+      "family": "bank_client",
+      "transfer_mode": "same_currency",
+      "shape": "a2c",
+      "provider_relation": "not_applicable",
+      "credit_addressing_mode": "CARD_NO"
+    },
+    "force_active": false,
+    "sender_selector": {
+      "customer_nos": [
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "0"
+      ],
+      "account_kind": "CURRENT",
+      "require_valid_session": true,
+      "min_balance": "1.00",
+      "prefer_default": true
+    },
+    "request": {
+      "accountCreditPropType": "CARD_NO",
+      "amountDebit": "1.00",
+      "paymentPurpose": "Template bank client same_currency current to card by card number"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "recipient_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": false,
+      "min_balance": "1.00",
+      "prefer_default": true,
+      "require_card_number": true,
+      "known_cards": [
+        {
+          "customer_no": "00575749",
+          "account_no": "1285110000646290",
+          "card_no": "4446791000084945",
+          "card_mask": "4446 **** **** 4945",
+          "preferred": true
+        },
+        {
+          "customer_no": "00575749",
+          "account_no": "1285110000646290",
+          "card_no": "4446791000075141",
+          "card_mask": "4446 **** **** 5141",
+          "preferred": false
+        },
+        {
+          "customer_no": "00909471",
+          "account_no": "1280016059312277",
+          "card_no": "4177480194280312",
+          "card_mask": "417748******0312",
+          "preferred": true
+        },
+        {
+          "customer_no": "00909471",
+          "account_no": "1280016059311570",
+          "card_no": "4177480194909100",
+          "card_mask": "417748******9100",
+          "preferred": true
+        },
+        {
+          "customer_no": "00909471",
+          "account_no": "1280016059311974",
+          "card_no": "5262477717040127",
+          "card_mask": "526247******0127",
+          "preferred": true
+        },
+        {
+          "customer_no": "00909471",
+          "account_no": "1280016059312176",
+          "card_no": "5262477721380931",
+          "card_mask": "526247******0931",
+          "preferred": true
+        },
+        {
+          "customer_no": "00909471",
+          "account_no": "1280016059312075",
+          "card_no": "5262477769210628",
+          "card_mask": "526247******0628",
+          "preferred": true
+        }
+      ]
+    },
+    "match_currency": true,
+    "preferred_card_numbers": [
+      {
+        "customer_no": "00575749",
+        "account_no": "1285110000646290",
+        "card_no": "4446791000084945"
+      },
+      {
+        "customer_no": "00909471",
+        "account_no": "1280016059312277",
+        "card_no": "4177480194280312"
+      },
+      {
+        "customer_no": "00909471",
+        "account_no": "1280016059311570",
+        "card_no": "4177480194909100"
+      },
+      {
+        "customer_no": "00909471",
+        "account_no": "1280016059311974",
+        "card_no": "5262477717040127"
+      },
+      {
+        "customer_no": "00909471",
+        "account_no": "1280016059312176",
+        "card_no": "5262477721380931"
+      },
+      {
+        "customer_no": "00909471",
+        "account_no": "1280016059312075",
+        "card_no": "5262477769210628"
+      }
+    ]
+  },
+  {
+    "name": "bank_client_same_currency_card_to_current_by_account",
+    "enabled": true,
+    "selection_limit": 2,
+    "route_key": "TEMPLATE:MAKE_BANK_CLIENT_TRANSFER:SAME:ACCOUNT_NO:CARD->CURRENT",
+    "operation": {
+      "code": "MAKE_BANK_CLIENT_TRANSFER"
+    },
+    "coverage": {
+      "family": "bank_client",
+      "transfer_mode": "same_currency",
+      "shape": "c2a",
+      "provider_relation": "not_applicable",
+      "credit_addressing_mode": "ACCOUNT_NO"
+    },
+    "force_active": false,
+    "sender_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": true,
+      "min_balance": "1.00",
+      "prefer_default": true
+    },
+    "request": {
+      "accountCreditPropType": "ACCOUNT_NO",
+      "amountDebit": "1.00",
+      "paymentPurpose": "Template bank client same_currency card to current by account"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "recipient_selector": {
+      "customer_nos": [
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "0"
+      ],
+      "account_kind": "CURRENT",
+      "require_valid_session": false,
+      "min_balance": "1.00",
+      "prefer_default": true
+    },
+    "match_currency": true
+  },
+  {
+    "name": "bank_client_fx_current_to_card_by_account",
+    "enabled": true,
+    "selection_limit": 2,
+    "route_key": "TEMPLATE:MAKE_BANK_CLIENT_TRANSFER:FX:ACCOUNT_NO:CURRENT->CARD",
+    "operation": {
+      "code": "MAKE_BANK_CLIENT_TRANSFER"
+    },
+    "coverage": {
+      "family": "bank_client",
+      "transfer_mode": "fx",
+      "shape": "a2c",
+      "provider_relation": "not_applicable",
+      "credit_addressing_mode": "ACCOUNT_NO"
+    },
+    "force_active": false,
+    "sender_selector": {
+      "customer_nos": [
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "0"
+      ],
+      "account_kind": "CURRENT",
+      "require_valid_session": true,
+      "min_balance": "1.00",
+      "prefer_default": true
+    },
+    "request": {
+      "accountCreditPropType": "ACCOUNT_NO",
+      "amountDebit": "1.00",
+      "paymentPurpose": "Template bank client fx current to card by account"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "recipient_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": false,
+      "min_balance": "1.00",
+      "prefer_default": true
+    },
+    "different_currency": true
+  },
+  {
+    "name": "bank_client_fx_current_to_card_by_card_no",
+    "enabled": true,
+    "selection_limit": 2,
+    "route_key": "TEMPLATE:MAKE_BANK_CLIENT_TRANSFER:FX:CARD_NO:CURRENT->CARD",
+    "operation": {
+      "code": "MAKE_BANK_CLIENT_TRANSFER"
+    },
+    "coverage": {
+      "family": "bank_client",
+      "transfer_mode": "fx",
+      "shape": "a2c",
+      "provider_relation": "not_applicable",
+      "credit_addressing_mode": "CARD_NO"
+    },
+    "force_active": false,
+    "sender_selector": {
+      "customer_nos": [
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "0"
+      ],
+      "account_kind": "CURRENT",
+      "require_valid_session": true,
+      "min_balance": "1.00",
+      "prefer_default": true
+    },
+    "request": {
+      "accountCreditPropType": "CARD_NO",
+      "amountDebit": "1.00",
+      "paymentPurpose": "Template bank client fx current to card by card number"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "recipient_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": false,
+      "min_balance": "1.00",
+      "prefer_default": true,
+      "require_card_number": true,
+      "known_cards": [
+        {
+          "customer_no": "00575749",
+          "account_no": "1285110000646290",
+          "card_no": "4446791000084945",
+          "card_mask": "4446 **** **** 4945",
+          "preferred": true
+        },
+        {
+          "customer_no": "00575749",
+          "account_no": "1285110000646290",
+          "card_no": "4446791000075141",
+          "card_mask": "4446 **** **** 5141",
+          "preferred": false
+        },
+        {
+          "customer_no": "00909471",
+          "account_no": "1280016059312277",
+          "card_no": "4177480194280312",
+          "card_mask": "417748******0312",
+          "preferred": true
+        },
+        {
+          "customer_no": "00909471",
+          "account_no": "1280016059311570",
+          "card_no": "4177480194909100",
+          "card_mask": "417748******9100",
+          "preferred": true
+        },
+        {
+          "customer_no": "00909471",
+          "account_no": "1280016059311974",
+          "card_no": "5262477717040127",
+          "card_mask": "526247******0127",
+          "preferred": true
+        },
+        {
+          "customer_no": "00909471",
+          "account_no": "1280016059312176",
+          "card_no": "5262477721380931",
+          "card_mask": "526247******0931",
+          "preferred": true
+        },
+        {
+          "customer_no": "00909471",
+          "account_no": "1280016059312075",
+          "card_no": "5262477769210628",
+          "card_mask": "526247******0628",
+          "preferred": true
+        }
+      ]
+    },
+    "different_currency": true,
+    "preferred_card_numbers": [
+      {
+        "customer_no": "00575749",
+        "account_no": "1285110000646290",
+        "card_no": "4446791000084945"
+      },
+      {
+        "customer_no": "00909471",
+        "account_no": "1280016059312277",
+        "card_no": "4177480194280312"
+      },
+      {
+        "customer_no": "00909471",
+        "account_no": "1280016059311570",
+        "card_no": "4177480194909100"
+      },
+      {
+        "customer_no": "00909471",
+        "account_no": "1280016059311974",
+        "card_no": "5262477717040127"
+      },
+      {
+        "customer_no": "00909471",
+        "account_no": "1280016059312176",
+        "card_no": "5262477721380931"
+      },
+      {
+        "customer_no": "00909471",
+        "account_no": "1280016059312075",
+        "card_no": "5262477769210628"
+      }
+    ]
+  },
+  {
+    "name": "bank_client_fx_card_to_current_by_account",
+    "enabled": true,
+    "selection_limit": 2,
+    "route_key": "TEMPLATE:MAKE_BANK_CLIENT_TRANSFER:FX:ACCOUNT_NO:CARD->CURRENT",
+    "operation": {
+      "code": "MAKE_BANK_CLIENT_TRANSFER"
+    },
+    "coverage": {
+      "family": "bank_client",
+      "transfer_mode": "fx",
+      "shape": "c2a",
+      "provider_relation": "not_applicable",
+      "credit_addressing_mode": "ACCOUNT_NO"
+    },
+    "force_active": false,
+    "sender_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": true,
+      "min_balance": "1.00",
+      "prefer_default": true
+    },
+    "request": {
+      "accountCreditPropType": "ACCOUNT_NO",
+      "amountDebit": "1.00",
+      "paymentPurpose": "Template bank client fx card to current by account"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "recipient_selector": {
+      "customer_nos": [
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "0"
+      ],
+      "account_kind": "CURRENT",
+      "require_valid_session": false,
+      "min_balance": "1.00",
+      "prefer_default": true
+    },
+    "different_currency": true
+  },
+  {
+    "name": "bank_client_same_currency_card_to_card_by_account_same_provider",
+    "enabled": true,
+    "selection_limit": 2,
+    "route_key": "TEMPLATE:MAKE_BANK_CLIENT_TRANSFER:SAME:ACCOUNT_NO:CARD->CARD:SAME_PROVIDER",
+    "operation": {
+      "code": "MAKE_BANK_CLIENT_TRANSFER"
+    },
+    "coverage": {
+      "family": "bank_client",
+      "transfer_mode": "same_currency",
+      "shape": "c2c",
+      "provider_relation": "same_provider",
+      "credit_addressing_mode": "ACCOUNT_NO"
+    },
+    "force_active": false,
+    "sender_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": true,
+      "min_balance": "1.00",
+      "prefer_default": true
+    },
+    "request": {
+      "accountCreditPropType": "ACCOUNT_NO",
+      "amountDebit": "1.00",
+      "paymentPurpose": "Template bank client same_currency card to card by account same_provider"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "recipient_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": false,
+      "min_balance": "1.00",
+      "prefer_default": true
+    },
+    "match_currency": true
+  },
+  {
+    "name": "bank_client_same_currency_card_to_card_by_card_no_same_provider",
+    "enabled": true,
+    "selection_limit": 2,
+    "route_key": "TEMPLATE:MAKE_BANK_CLIENT_TRANSFER:SAME:CARD_NO:CARD->CARD:SAME_PROVIDER",
+    "operation": {
+      "code": "MAKE_BANK_CLIENT_TRANSFER"
+    },
+    "coverage": {
+      "family": "bank_client",
+      "transfer_mode": "same_currency",
+      "shape": "c2c",
+      "provider_relation": "same_provider",
+      "credit_addressing_mode": "CARD_NO"
+    },
+    "force_active": false,
+    "sender_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": true,
+      "min_balance": "1.00",
+      "prefer_default": true
+    },
+    "request": {
+      "accountCreditPropType": "CARD_NO",
+      "amountDebit": "1.00",
+      "paymentPurpose": "Template bank client same_currency card to card by card number same_provider"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "recipient_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": false,
+      "min_balance": "1.00",
+      "prefer_default": true,
+      "require_card_number": true,
+      "known_cards": [
+        {
+          "customer_no": "00575749",
+          "account_no": "1285110000646290",
+          "card_no": "4446791000084945",
+          "card_mask": "4446 **** **** 4945",
+          "preferred": true
+        },
+        {
+          "customer_no": "00575749",
+          "account_no": "1285110000646290",
+          "card_no": "4446791000075141",
+          "card_mask": "4446 **** **** 5141",
+          "preferred": false
+        },
+        {
+          "customer_no": "00909471",
+          "account_no": "1280016059312277",
+          "card_no": "4177480194280312",
+          "card_mask": "417748******0312",
+          "preferred": true
+        },
+        {
+          "customer_no": "00909471",
+          "account_no": "1280016059311570",
+          "card_no": "4177480194909100",
+          "card_mask": "417748******9100",
+          "preferred": true
+        },
+        {
+          "customer_no": "00909471",
+          "account_no": "1280016059311974",
+          "card_no": "5262477717040127",
+          "card_mask": "526247******0127",
+          "preferred": true
+        },
+        {
+          "customer_no": "00909471",
+          "account_no": "1280016059312176",
+          "card_no": "5262477721380931",
+          "card_mask": "526247******0931",
+          "preferred": true
+        },
+        {
+          "customer_no": "00909471",
+          "account_no": "1280016059312075",
+          "card_no": "5262477769210628",
+          "card_mask": "526247******0628",
+          "preferred": true
+        }
+      ]
+    },
+    "match_currency": true,
+    "preferred_card_numbers": [
+      {
+        "customer_no": "00575749",
+        "account_no": "1285110000646290",
+        "card_no": "4446791000084945"
+      },
+      {
+        "customer_no": "00909471",
+        "account_no": "1280016059312277",
+        "card_no": "4177480194280312"
+      },
+      {
+        "customer_no": "00909471",
+        "account_no": "1280016059311570",
+        "card_no": "4177480194909100"
+      },
+      {
+        "customer_no": "00909471",
+        "account_no": "1280016059311974",
+        "card_no": "5262477717040127"
+      },
+      {
+        "customer_no": "00909471",
+        "account_no": "1280016059312176",
+        "card_no": "5262477721380931"
+      },
+      {
+        "customer_no": "00909471",
+        "account_no": "1280016059312075",
+        "card_no": "5262477769210628"
+      }
+    ]
+  },
+  {
+    "name": "bank_client_same_currency_card_to_card_by_account_cross_provider",
+    "enabled": true,
+    "selection_limit": 2,
+    "route_key": "TEMPLATE:MAKE_BANK_CLIENT_TRANSFER:SAME:ACCOUNT_NO:CARD->CARD:CROSS_PROVIDER",
+    "operation": {
+      "code": "MAKE_BANK_CLIENT_TRANSFER"
+    },
+    "coverage": {
+      "family": "bank_client",
+      "transfer_mode": "same_currency",
+      "shape": "c2c",
+      "provider_relation": "cross_provider",
+      "credit_addressing_mode": "ACCOUNT_NO"
+    },
+    "force_active": false,
+    "sender_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": true,
+      "min_balance": "1.00",
+      "prefer_default": true
+    },
+    "request": {
+      "accountCreditPropType": "ACCOUNT_NO",
+      "amountDebit": "1.00",
+      "paymentPurpose": "Template bank client same_currency card to card by account cross_provider"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "recipient_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": false,
+      "min_balance": "1.00",
+      "prefer_default": true
+    },
+    "match_currency": true
+  },
+  {
+    "name": "bank_client_same_currency_card_to_card_by_card_no_cross_provider",
+    "enabled": true,
+    "selection_limit": 2,
+    "route_key": "TEMPLATE:MAKE_BANK_CLIENT_TRANSFER:SAME:CARD_NO:CARD->CARD:CROSS_PROVIDER",
+    "operation": {
+      "code": "MAKE_BANK_CLIENT_TRANSFER"
+    },
+    "coverage": {
+      "family": "bank_client",
+      "transfer_mode": "same_currency",
+      "shape": "c2c",
+      "provider_relation": "cross_provider",
+      "credit_addressing_mode": "CARD_NO"
+    },
+    "force_active": false,
+    "sender_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": true,
+      "min_balance": "1.00",
+      "prefer_default": true
+    },
+    "request": {
+      "accountCreditPropType": "CARD_NO",
+      "amountDebit": "1.00",
+      "paymentPurpose": "Template bank client same_currency card to card by card number cross_provider"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "recipient_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": false,
+      "min_balance": "1.00",
+      "prefer_default": true,
+      "require_card_number": true,
+      "known_cards": [
+        {
+          "customer_no": "00575749",
+          "account_no": "1285110000646290",
+          "card_no": "4446791000084945",
+          "card_mask": "4446 **** **** 4945",
+          "preferred": true
+        },
+        {
+          "customer_no": "00575749",
+          "account_no": "1285110000646290",
+          "card_no": "4446791000075141",
+          "card_mask": "4446 **** **** 5141",
+          "preferred": false
+        },
+        {
+          "customer_no": "00909471",
+          "account_no": "1280016059312277",
+          "card_no": "4177480194280312",
+          "card_mask": "417748******0312",
+          "preferred": true
+        },
+        {
+          "customer_no": "00909471",
+          "account_no": "1280016059311570",
+          "card_no": "4177480194909100",
+          "card_mask": "417748******9100",
+          "preferred": true
+        },
+        {
+          "customer_no": "00909471",
+          "account_no": "1280016059311974",
+          "card_no": "5262477717040127",
+          "card_mask": "526247******0127",
+          "preferred": true
+        },
+        {
+          "customer_no": "00909471",
+          "account_no": "1280016059312176",
+          "card_no": "5262477721380931",
+          "card_mask": "526247******0931",
+          "preferred": true
+        },
+        {
+          "customer_no": "00909471",
+          "account_no": "1280016059312075",
+          "card_no": "5262477769210628",
+          "card_mask": "526247******0628",
+          "preferred": true
+        }
+      ]
+    },
+    "match_currency": true,
+    "preferred_card_numbers": [
+      {
+        "customer_no": "00575749",
+        "account_no": "1285110000646290",
+        "card_no": "4446791000084945"
+      },
+      {
+        "customer_no": "00909471",
+        "account_no": "1280016059312277",
+        "card_no": "4177480194280312"
+      },
+      {
+        "customer_no": "00909471",
+        "account_no": "1280016059311570",
+        "card_no": "4177480194909100"
+      },
+      {
+        "customer_no": "00909471",
+        "account_no": "1280016059311974",
+        "card_no": "5262477717040127"
+      },
+      {
+        "customer_no": "00909471",
+        "account_no": "1280016059312176",
+        "card_no": "5262477721380931"
+      },
+      {
+        "customer_no": "00909471",
+        "account_no": "1280016059312075",
+        "card_no": "5262477769210628"
+      }
+    ]
+  },
+  {
+    "name": "bank_client_fx_card_to_card_by_account_same_provider",
+    "enabled": true,
+    "selection_limit": 2,
+    "route_key": "TEMPLATE:MAKE_BANK_CLIENT_TRANSFER:FX:ACCOUNT_NO:CARD->CARD:SAME_PROVIDER",
+    "operation": {
+      "code": "MAKE_BANK_CLIENT_TRANSFER"
+    },
+    "coverage": {
+      "family": "bank_client",
+      "transfer_mode": "fx",
+      "shape": "c2c",
+      "provider_relation": "same_provider",
+      "credit_addressing_mode": "ACCOUNT_NO"
+    },
+    "force_active": false,
+    "sender_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": true,
+      "min_balance": "1.00",
+      "prefer_default": true
+    },
+    "request": {
+      "accountCreditPropType": "ACCOUNT_NO",
+      "amountDebit": "1.00",
+      "paymentPurpose": "Template bank client fx card to card by account same_provider"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "recipient_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": false,
+      "min_balance": "1.00",
+      "prefer_default": true
+    },
+    "different_currency": true
+  },
+  {
+    "name": "bank_client_fx_card_to_card_by_card_no_same_provider",
+    "enabled": true,
+    "selection_limit": 2,
+    "route_key": "TEMPLATE:MAKE_BANK_CLIENT_TRANSFER:FX:CARD_NO:CARD->CARD:SAME_PROVIDER",
+    "operation": {
+      "code": "MAKE_BANK_CLIENT_TRANSFER"
+    },
+    "coverage": {
+      "family": "bank_client",
+      "transfer_mode": "fx",
+      "shape": "c2c",
+      "provider_relation": "same_provider",
+      "credit_addressing_mode": "CARD_NO"
+    },
+    "force_active": false,
+    "sender_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": true,
+      "min_balance": "1.00",
+      "prefer_default": true
+    },
+    "request": {
+      "accountCreditPropType": "CARD_NO",
+      "amountDebit": "1.00",
+      "paymentPurpose": "Template bank client fx card to card by card number same_provider"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "recipient_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": false,
+      "min_balance": "1.00",
+      "prefer_default": true,
+      "require_card_number": true,
+      "known_cards": [
+        {
+          "customer_no": "00575749",
+          "account_no": "1285110000646290",
+          "card_no": "4446791000084945",
+          "card_mask": "4446 **** **** 4945",
+          "preferred": true
+        },
+        {
+          "customer_no": "00575749",
+          "account_no": "1285110000646290",
+          "card_no": "4446791000075141",
+          "card_mask": "4446 **** **** 5141",
+          "preferred": false
+        },
+        {
+          "customer_no": "00909471",
+          "account_no": "1280016059312277",
+          "card_no": "4177480194280312",
+          "card_mask": "417748******0312",
+          "preferred": true
+        },
+        {
+          "customer_no": "00909471",
+          "account_no": "1280016059311570",
+          "card_no": "4177480194909100",
+          "card_mask": "417748******9100",
+          "preferred": true
+        },
+        {
+          "customer_no": "00909471",
+          "account_no": "1280016059311974",
+          "card_no": "5262477717040127",
+          "card_mask": "526247******0127",
+          "preferred": true
+        },
+        {
+          "customer_no": "00909471",
+          "account_no": "1280016059312176",
+          "card_no": "5262477721380931",
+          "card_mask": "526247******0931",
+          "preferred": true
+        },
+        {
+          "customer_no": "00909471",
+          "account_no": "1280016059312075",
+          "card_no": "5262477769210628",
+          "card_mask": "526247******0628",
+          "preferred": true
+        }
+      ]
+    },
+    "different_currency": true,
+    "preferred_card_numbers": [
+      {
+        "customer_no": "00575749",
+        "account_no": "1285110000646290",
+        "card_no": "4446791000084945"
+      },
+      {
+        "customer_no": "00909471",
+        "account_no": "1280016059312277",
+        "card_no": "4177480194280312"
+      },
+      {
+        "customer_no": "00909471",
+        "account_no": "1280016059311570",
+        "card_no": "4177480194909100"
+      },
+      {
+        "customer_no": "00909471",
+        "account_no": "1280016059311974",
+        "card_no": "5262477717040127"
+      },
+      {
+        "customer_no": "00909471",
+        "account_no": "1280016059312176",
+        "card_no": "5262477721380931"
+      },
+      {
+        "customer_no": "00909471",
+        "account_no": "1280016059312075",
+        "card_no": "5262477769210628"
+      }
+    ]
+  },
+  {
+    "name": "bank_client_fx_card_to_card_by_account_cross_provider",
+    "enabled": true,
+    "selection_limit": 2,
+    "route_key": "TEMPLATE:MAKE_BANK_CLIENT_TRANSFER:FX:ACCOUNT_NO:CARD->CARD:CROSS_PROVIDER",
+    "operation": {
+      "code": "MAKE_BANK_CLIENT_TRANSFER"
+    },
+    "coverage": {
+      "family": "bank_client",
+      "transfer_mode": "fx",
+      "shape": "c2c",
+      "provider_relation": "cross_provider",
+      "credit_addressing_mode": "ACCOUNT_NO"
+    },
+    "force_active": false,
+    "sender_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": true,
+      "min_balance": "1.00",
+      "prefer_default": true
+    },
+    "request": {
+      "accountCreditPropType": "ACCOUNT_NO",
+      "amountDebit": "1.00",
+      "paymentPurpose": "Template bank client fx card to card by account cross_provider"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "recipient_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": false,
+      "min_balance": "1.00",
+      "prefer_default": true
+    },
+    "different_currency": true
+  },
+  {
+    "name": "bank_client_fx_card_to_card_by_card_no_cross_provider",
+    "enabled": true,
+    "selection_limit": 2,
+    "route_key": "TEMPLATE:MAKE_BANK_CLIENT_TRANSFER:FX:CARD_NO:CARD->CARD:CROSS_PROVIDER",
+    "operation": {
+      "code": "MAKE_BANK_CLIENT_TRANSFER"
+    },
+    "coverage": {
+      "family": "bank_client",
+      "transfer_mode": "fx",
+      "shape": "c2c",
+      "provider_relation": "cross_provider",
+      "credit_addressing_mode": "CARD_NO"
+    },
+    "force_active": false,
+    "sender_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": true,
+      "min_balance": "1.00",
+      "prefer_default": true
+    },
+    "request": {
+      "accountCreditPropType": "CARD_NO",
+      "amountDebit": "1.00",
+      "paymentPurpose": "Template bank client fx card to card by card number cross_provider"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "recipient_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": false,
+      "min_balance": "1.00",
+      "prefer_default": true,
+      "require_card_number": true,
+      "known_cards": [
+        {
+          "customer_no": "00575749",
+          "account_no": "1285110000646290",
+          "card_no": "4446791000084945",
+          "card_mask": "4446 **** **** 4945",
+          "preferred": true
+        },
+        {
+          "customer_no": "00575749",
+          "account_no": "1285110000646290",
+          "card_no": "4446791000075141",
+          "card_mask": "4446 **** **** 5141",
+          "preferred": false
+        },
+        {
+          "customer_no": "00909471",
+          "account_no": "1280016059312277",
+          "card_no": "4177480194280312",
+          "card_mask": "417748******0312",
+          "preferred": true
+        },
+        {
+          "customer_no": "00909471",
+          "account_no": "1280016059311570",
+          "card_no": "4177480194909100",
+          "card_mask": "417748******9100",
+          "preferred": true
+        },
+        {
+          "customer_no": "00909471",
+          "account_no": "1280016059311974",
+          "card_no": "5262477717040127",
+          "card_mask": "526247******0127",
+          "preferred": true
+        },
+        {
+          "customer_no": "00909471",
+          "account_no": "1280016059312176",
+          "card_no": "5262477721380931",
+          "card_mask": "526247******0931",
+          "preferred": true
+        },
+        {
+          "customer_no": "00909471",
+          "account_no": "1280016059312075",
+          "card_no": "5262477769210628",
+          "card_mask": "526247******0628",
+          "preferred": true
+        }
+      ]
+    },
+    "different_currency": true,
+    "preferred_card_numbers": [
+      {
+        "customer_no": "00575749",
+        "account_no": "1285110000646290",
+        "card_no": "4446791000084945"
+      },
+      {
+        "customer_no": "00909471",
+        "account_no": "1280016059312277",
+        "card_no": "4177480194280312"
+      },
+      {
+        "customer_no": "00909471",
+        "account_no": "1280016059311570",
+        "card_no": "4177480194909100"
+      },
+      {
+        "customer_no": "00909471",
+        "account_no": "1280016059311974",
+        "card_no": "5262477717040127"
+      },
+      {
+        "customer_no": "00909471",
+        "account_no": "1280016059312176",
+        "card_no": "5262477721380931"
+      },
+      {
+        "customer_no": "00909471",
+        "account_no": "1280016059312075",
+        "card_no": "5262477769210628"
+      }
+    ]
+  },
+  {
+    "name": "own_accounts_same_currency_current_to_card",
+    "enabled": true,
+    "selection_limit": 2,
+    "route_key": "TEMPLATE:MAKE_OWN_ACCOUNTS_TRANSFER:SAME:CURRENT->CARD",
+    "operation": {
+      "code": "MAKE_OWN_ACCOUNTS_TRANSFER"
+    },
+    "coverage": {
+      "family": "own_accounts",
+      "transfer_mode": "same_currency",
+      "shape": "a2c",
+      "provider_relation": "not_applicable",
+      "credit_addressing_mode": "ACCOUNT_ID"
+    },
+    "force_active": true,
+    "sender_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "0"
+      ],
+      "account_kind": "CURRENT",
+      "require_valid_session": true,
+      "min_balance": "1.00",
+      "prefer_default": true
+    },
+    "request": {
+      "amountDebit": "1.00",
+      "paymentPurpose": "Template own accounts same_currency current to card"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "recipient_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": false,
+      "min_balance": "1.00",
+      "prefer_default": true
+    },
+    "match_currency": true,
+    "allow_same_customer": true
+  },
+  {
+    "name": "own_accounts_same_currency_card_to_current",
+    "enabled": true,
+    "selection_limit": 2,
+    "route_key": "TEMPLATE:MAKE_OWN_ACCOUNTS_TRANSFER:SAME:CARD->CURRENT",
+    "operation": {
+      "code": "MAKE_OWN_ACCOUNTS_TRANSFER"
+    },
+    "coverage": {
+      "family": "own_accounts",
+      "transfer_mode": "same_currency",
+      "shape": "c2a",
+      "provider_relation": "not_applicable",
+      "credit_addressing_mode": "ACCOUNT_ID"
+    },
+    "force_active": true,
+    "sender_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": true,
+      "min_balance": "1.00",
+      "prefer_default": true
+    },
+    "request": {
+      "amountDebit": "1.00",
+      "paymentPurpose": "Template own accounts same_currency card to current"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "recipient_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "0"
+      ],
+      "account_kind": "CURRENT",
+      "require_valid_session": false,
+      "min_balance": "1.00",
+      "prefer_default": true
+    },
+    "match_currency": true,
+    "allow_same_customer": true
+  },
+  {
+    "name": "own_accounts_fx_current_to_card",
+    "enabled": true,
+    "selection_limit": 2,
+    "route_key": "TEMPLATE:MAKE_OWN_ACCOUNTS_TRANSFER:FX:CURRENT->CARD",
+    "operation": {
+      "code": "MAKE_OWN_ACCOUNTS_TRANSFER"
+    },
+    "coverage": {
+      "family": "own_accounts",
+      "transfer_mode": "fx",
+      "shape": "a2c",
+      "provider_relation": "not_applicable",
+      "credit_addressing_mode": "ACCOUNT_ID"
+    },
+    "force_active": true,
+    "sender_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "0"
+      ],
+      "account_kind": "CURRENT",
+      "require_valid_session": true,
+      "min_balance": "1.00",
+      "prefer_default": true
+    },
+    "request": {
+      "amountDebit": "1.00",
+      "paymentPurpose": "Template own accounts fx current to card"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "recipient_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": false,
+      "min_balance": "1.00",
+      "prefer_default": true
+    },
+    "different_currency": true,
+    "allow_same_customer": true
+  },
+  {
+    "name": "own_accounts_fx_card_to_current",
+    "enabled": true,
+    "selection_limit": 2,
+    "route_key": "TEMPLATE:MAKE_OWN_ACCOUNTS_TRANSFER:FX:CARD->CURRENT",
+    "operation": {
+      "code": "MAKE_OWN_ACCOUNTS_TRANSFER"
+    },
+    "coverage": {
+      "family": "own_accounts",
+      "transfer_mode": "fx",
+      "shape": "c2a",
+      "provider_relation": "not_applicable",
+      "credit_addressing_mode": "ACCOUNT_ID"
+    },
+    "force_active": true,
+    "sender_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": true,
+      "min_balance": "1.00",
+      "prefer_default": true
+    },
+    "request": {
+      "amountDebit": "1.00",
+      "paymentPurpose": "Template own accounts fx card to current"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "recipient_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "0"
+      ],
+      "account_kind": "CURRENT",
+      "require_valid_session": false,
+      "min_balance": "1.00",
+      "prefer_default": true
+    },
+    "different_currency": true,
+    "allow_same_customer": true
+  },
+  {
+    "name": "own_accounts_same_currency_card_to_card_same_provider",
+    "enabled": true,
+    "selection_limit": 2,
+    "route_key": "TEMPLATE:MAKE_OWN_ACCOUNTS_TRANSFER:SAME:CARD->CARD:SAME_PROVIDER",
+    "operation": {
+      "code": "MAKE_OWN_ACCOUNTS_TRANSFER"
+    },
+    "coverage": {
+      "family": "own_accounts",
+      "transfer_mode": "same_currency",
+      "shape": "c2c",
+      "provider_relation": "same_provider",
+      "credit_addressing_mode": "ACCOUNT_ID"
+    },
+    "force_active": true,
+    "sender_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": true,
+      "min_balance": "1.00",
+      "prefer_default": true
+    },
+    "request": {
+      "amountDebit": "1.00",
+      "paymentPurpose": "Template own accounts same_currency card to card same_provider"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "recipient_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": false,
+      "min_balance": "1.00",
+      "prefer_default": true
+    },
+    "match_currency": true,
+    "allow_same_customer": true
+  },
+  {
+    "name": "own_accounts_same_currency_card_to_card_cross_provider",
+    "enabled": true,
+    "selection_limit": 2,
+    "route_key": "TEMPLATE:MAKE_OWN_ACCOUNTS_TRANSFER:SAME:CARD->CARD:CROSS_PROVIDER",
+    "operation": {
+      "code": "MAKE_OWN_ACCOUNTS_TRANSFER"
+    },
+    "coverage": {
+      "family": "own_accounts",
+      "transfer_mode": "same_currency",
+      "shape": "c2c",
+      "provider_relation": "cross_provider",
+      "credit_addressing_mode": "ACCOUNT_ID"
+    },
+    "force_active": true,
+    "sender_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": true,
+      "min_balance": "1.00",
+      "prefer_default": true
+    },
+    "request": {
+      "amountDebit": "1.00",
+      "paymentPurpose": "Template own accounts same_currency card to card cross_provider"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "recipient_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": false,
+      "min_balance": "1.00",
+      "prefer_default": true
+    },
+    "match_currency": true,
+    "allow_same_customer": true
+  },
+  {
+    "name": "own_accounts_fx_card_to_card_same_provider",
+    "enabled": true,
+    "selection_limit": 2,
+    "route_key": "TEMPLATE:MAKE_OWN_ACCOUNTS_TRANSFER:FX:CARD->CARD:SAME_PROVIDER",
+    "operation": {
+      "code": "MAKE_OWN_ACCOUNTS_TRANSFER"
+    },
+    "coverage": {
+      "family": "own_accounts",
+      "transfer_mode": "fx",
+      "shape": "c2c",
+      "provider_relation": "same_provider",
+      "credit_addressing_mode": "ACCOUNT_ID"
+    },
+    "force_active": true,
+    "sender_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": true,
+      "min_balance": "1.00",
+      "prefer_default": true
+    },
+    "request": {
+      "amountDebit": "1.00",
+      "paymentPurpose": "Template own accounts fx card to card same_provider"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "recipient_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": false,
+      "min_balance": "1.00",
+      "prefer_default": true
+    },
+    "different_currency": true,
+    "allow_same_customer": true
+  },
+  {
+    "name": "own_accounts_fx_card_to_card_cross_provider",
+    "enabled": true,
+    "selection_limit": 2,
+    "route_key": "TEMPLATE:MAKE_OWN_ACCOUNTS_TRANSFER:FX:CARD->CARD:CROSS_PROVIDER",
+    "operation": {
+      "code": "MAKE_OWN_ACCOUNTS_TRANSFER"
+    },
+    "coverage": {
+      "family": "own_accounts",
+      "transfer_mode": "fx",
+      "shape": "c2c",
+      "provider_relation": "cross_provider",
+      "credit_addressing_mode": "ACCOUNT_ID"
+    },
+    "force_active": true,
+    "sender_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": true,
+      "min_balance": "1.00",
+      "prefer_default": true
+    },
+    "request": {
+      "amountDebit": "1.00",
+      "paymentPurpose": "Template own accounts fx card to card cross_provider"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "recipient_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": false,
+      "min_balance": "1.00",
+      "prefer_default": true
+    },
+    "different_currency": true,
+    "allow_same_customer": true
+  },
+  {
+    "name": "other_bank_clearing_card_debit",
+    "enabled": true,
+    "selection_limit": 2,
+    "route_key": "TEMPLATE:MAKE_OTHER_BANK_TRANSFER:CLEARING:CARD->EXTERNAL",
+    "operation": {
+      "code": "MAKE_OTHER_BANK_TRANSFER"
+    },
+    "coverage": {
+      "family": "other_bank",
+      "transfer_mode": "clearing",
+      "shape": "c2external",
+      "provider_relation": "not_applicable",
+      "credit_addressing_mode": "EXTERNAL"
+    },
+    "force_active": false,
+    "sender_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": true,
+      "min_balance": "300.00",
+      "prefer_default": true
+    },
+    "request": {
+      "transferClearingGross": "C",
+      "valueDate": "__NEXT_BUSINESS_DAY__",
+      "recipientName": "ОсОО Скай Мобайл ",
+      "recipientBankBic": "109022",
+      "accountCreditNumber": "1092220118930181",
+      "transferPurposeText": "услуги мобильной связи",
+      "knp": "42122700",
+      "amountCredit": "280.00"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": false,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    }
+  },
+  {
+    "name": "other_bank_gross_card_debit",
+    "enabled": true,
+    "selection_limit": 2,
+    "route_key": "TEMPLATE:MAKE_OTHER_BANK_TRANSFER:GROSS:CARD->EXTERNAL",
+    "operation": {
+      "code": "MAKE_OTHER_BANK_TRANSFER"
+    },
+    "coverage": {
+      "family": "other_bank",
+      "transfer_mode": "gross",
+      "shape": "c2external",
+      "provider_relation": "not_applicable",
+      "credit_addressing_mode": "EXTERNAL"
+    },
+    "force_active": false,
+    "sender_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": true,
+      "min_balance": "300.00",
+      "prefer_default": true
+    },
+    "request": {
+      "transferClearingGross": "G",
+      "valueDate": "__NEXT_BUSINESS_DAY__",
+      "recipientName": "ОсОО Скай Мобайл ",
+      "recipientBankBic": "109022",
+      "accountCreditNumber": "1092220118930181",
+      "transferPurposeText": "услуги мобильной связи",
+      "knp": "42122700",
+      "amountCredit": "280.00"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": false,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    }
+  },
+  {
+    "name": "qr_internal_card_to_card_same_provider",
+    "enabled": true,
+    "selection_limit": 2,
+    "route_key": "TEMPLATE:MAKE_QR_PAYMENT:INTERNAL:STATIC_02:CARD->CARD:SAME_PROVIDER",
+    "operation": {
+      "code": "MAKE_QR_PAYMENT"
+    },
+    "coverage": {
+      "family": "qr",
+      "transfer_mode": "same_currency",
+      "shape": "c2c",
+      "provider_relation": "same_provider",
+      "credit_addressing_mode": "QR_ACCOUNT"
+    },
+    "force_active": true,
+    "sender_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": true,
+      "min_balance": "10.00",
+      "prefer_default": true,
+      "currencies": [
+        "KGS"
+      ]
+    },
+    "request": {
+      "clientType": "1",
+      "qrVersion": "01",
+      "qrType": "STATIC",
+      "qrMerchantProviderId": "p2p.kicb.net",
+      "amount": "10",
+      "qrServiceId": "02",
+      "qrAccount": "__RECIPIENT_ACCOUNT_NO__",
+      "qrMcc": "9999",
+      "qrCcy": "417",
+      "qrTransactionId": "__UNIQUE_QR_TXN_ID__",
+      "qrServiceName": "Internal QR",
+      "qrAccountChangeable": false,
+      "qrControlSum": "__AMOUNT__"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "recipient_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": false,
+      "min_balance": "1.00",
+      "prefer_default": true,
+      "currencies": [
+        "KGS"
+      ]
+    }
+  },
+  {
+    "name": "qr_internal_card_to_card_cross_provider",
+    "enabled": true,
+    "selection_limit": 2,
+    "route_key": "TEMPLATE:MAKE_QR_PAYMENT:INTERNAL:STATIC_02:CARD->CARD:CROSS_PROVIDER",
+    "operation": {
+      "code": "MAKE_QR_PAYMENT"
+    },
+    "coverage": {
+      "family": "qr",
+      "transfer_mode": "same_currency",
+      "shape": "c2c",
+      "provider_relation": "cross_provider",
+      "credit_addressing_mode": "QR_ACCOUNT"
+    },
+    "force_active": true,
+    "sender_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": true,
+      "min_balance": "10.00",
+      "prefer_default": true,
+      "currencies": [
+        "KGS"
+      ]
+    },
+    "request": {
+      "clientType": "1",
+      "qrVersion": "01",
+      "qrType": "STATIC",
+      "qrMerchantProviderId": "p2p.kicb.net",
+      "amount": "10",
+      "qrServiceId": "02",
+      "qrAccount": "__RECIPIENT_ACCOUNT_NO__",
+      "qrMcc": "9999",
+      "qrCcy": "417",
+      "qrTransactionId": "__UNIQUE_QR_TXN_ID__",
+      "qrServiceName": "Internal QR",
+      "qrAccountChangeable": false,
+      "qrControlSum": "__AMOUNT__"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "recipient_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": false,
+      "min_balance": "1.00",
+      "prefer_default": true,
+      "currencies": [
+        "KGS"
+      ]
+    }
+  },
+  {
+    "name": "qr_internal_card_to_account",
+    "enabled": true,
+    "selection_limit": 2,
+    "route_key": "TEMPLATE:MAKE_QR_PAYMENT:INTERNAL:STATIC_02:CARD->CURRENT",
+    "operation": {
+      "code": "MAKE_QR_PAYMENT"
+    },
+    "coverage": {
+      "family": "qr",
+      "transfer_mode": "same_currency",
+      "shape": "c2a",
+      "provider_relation": "not_applicable",
+      "credit_addressing_mode": "QR_ACCOUNT"
+    },
+    "force_active": true,
+    "sender_selector": {
+      "customer_nos": [
+        "00575749",
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "3"
+      ],
+      "account_kind": "CARD",
+      "processors": [
+        "COMPASS",
+        "IPC"
+      ],
+      "require_valid_session": true,
+      "min_balance": "10.00",
+      "prefer_default": true,
+      "currencies": [
+        "KGS"
+      ]
+    },
+    "request": {
+      "clientType": "1",
+      "qrVersion": "01",
+      "qrType": "STATIC",
+      "qrMerchantProviderId": "p2p.kicb.net",
+      "amount": "10",
+      "qrServiceId": "02",
+      "qrAccount": "__RECIPIENT_ACCOUNT_NO__",
+      "qrMcc": "9999",
+      "qrCcy": "417",
+      "qrTransactionId": "__UNIQUE_QR_TXN_ID__",
+      "qrServiceName": "Internal QR",
+      "qrAccountChangeable": false,
+      "qrControlSum": "__AMOUNT__"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "recipient_selector": {
+      "customer_nos": [
+        "00909471",
+        "00909472"
+      ],
+      "account_class_prefixes": [
+        "0"
+      ],
+      "account_kind": "CURRENT",
+      "require_valid_session": false,
+      "min_balance": "1.00",
+      "prefer_default": true,
+      "currencies": [
+        "KGS"
+      ]
+    }
+  },
+  {
+    "name": "bank_client_fx_current_to_card_probe_by_account_kgs_current_none_c00909469_a0762_to_usd_card_compass_c00909471_a1368",
+    "enabled": true,
+    "selection_limit": 1,
+    "route_key": "MAKE_BANK_CLIENT_TRANSFER:ACCOUNT_NO:CURRENT:NONE:KGS->CARD:COMPASS:VISA:USD:PROBE_TARGET_00909471_A1368",
+    "operation": {
+      "code": "MAKE_BANK_CLIENT_TRANSFER"
+    },
+    "coverage": {
+      "family": "bank_client",
+      "transfer_mode": "fx",
+      "shape": "a2c",
+      "provider_relation": "not_applicable",
+      "credit_addressing_mode": "ACCOUNT_NO"
+    },
+    "force_active": true,
+    "sender": {
+      "customer_no": "00909469",
+      "account_no": "1280016059310762",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CURRENT",
+        "processor": "NONE"
+      }
+    },
+    "recipient": {
+      "customer_no": "00909471",
+      "account_no": "1280016059311368",
+      "expected": {
+        "currency": "USD",
+        "account_kind": "CARD",
+        "processor": "COMPASS",
+        "card_system": "VISA"
+      },
+      "card_mask": "417748******8335"
+    },
+    "request": {
+      "accountCreditPropType": "ACCOUNT_NO",
+      "amountDebit": "1.00",
+      "paymentPurpose": "Targeted probe credit by account number to 00909471 USD Compass card"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "coverage_bucket": "bank_client_fx_a2c_not_applicable_account_no_probe",
+    "preferred_card_used": false,
+    "selection_metadata": {
+      "template_name": "bank_client_fx_current_to_card_probe_by_account_target_00909471_a1368",
+      "sender_is_default": true,
+      "recipient_is_default": false,
+      "coverage": {
+        "family": "bank_client",
+        "transfer_mode": "fx",
+        "shape": "a2c",
+        "provider_relation": "not_applicable",
+        "credit_addressing_mode": "ACCOUNT_NO"
+      },
+      "coverage_bucket": "bank_client_fx_a2c_not_applicable_account_no_probe",
+      "force_active": true,
+      "preferred_card_used": false
+    }
+  },
+  {
+    "name": "bank_client_fx_current_to_card_probe_by_card_no_kgs_current_none_c00909469_a0762_to_usd_card_compass_c00909471_a1368",
+    "enabled": true,
+    "selection_limit": 1,
+    "route_key": "MAKE_BANK_CLIENT_TRANSFER:CARD_NO:CURRENT:NONE:KGS->CARD:COMPASS:VISA:USD:PROBE_TARGET_00909471_A1368",
+    "operation": {
+      "code": "MAKE_BANK_CLIENT_TRANSFER"
+    },
+    "coverage": {
+      "family": "bank_client",
+      "transfer_mode": "fx",
+      "shape": "a2c",
+      "provider_relation": "not_applicable",
+      "credit_addressing_mode": "CARD_NO"
+    },
+    "force_active": true,
+    "sender": {
+      "customer_no": "00909469",
+      "account_no": "1280016059310762",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CURRENT",
+        "processor": "NONE"
+      }
+    },
+    "recipient": {
+      "customer_no": "00909471",
+      "account_no": "1280016059311368",
+      "expected": {
+        "currency": "USD",
+        "account_kind": "CARD",
+        "processor": "COMPASS",
+        "card_system": "VISA"
+      },
+      "card_no": "4177480119838335",
+      "card_mask": "417748******8335"
+    },
+    "request": {
+      "accountCreditPropType": "CARD_NO",
+      "amountDebit": "1.00",
+      "paymentPurpose": "Targeted probe credit by card number to 00909471 USD Compass card"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "coverage_bucket": "bank_client_fx_a2c_not_applicable_card_no_probe",
+    "preferred_card_used": true,
+    "selection_metadata": {
+      "template_name": "bank_client_fx_current_to_card_probe_by_card_no_target_00909471_a1368",
+      "sender_is_default": true,
+      "recipient_is_default": false,
+      "coverage": {
+        "family": "bank_client",
+        "transfer_mode": "fx",
+        "shape": "a2c",
+        "provider_relation": "not_applicable",
+        "credit_addressing_mode": "CARD_NO"
+      },
+      "coverage_bucket": "bank_client_fx_a2c_not_applicable_card_no_probe",
+      "force_active": true,
+      "preferred_card_used": true
+    }
+  }
+]

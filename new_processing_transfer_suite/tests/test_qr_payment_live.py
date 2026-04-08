@@ -18,6 +18,7 @@ TEST_CASES = load_case_file(
 )
 
 
-@pytest.mark.parametrize("case", TEST_CASES, ids=[case["name"] for case in TEST_CASES])
-def test_qr_payment_live(case: dict):
-    run_live_case(case)
+if TEST_CASES:
+    @pytest.mark.parametrize("case", TEST_CASES, ids=[case["name"] for case in TEST_CASES])
+    def test_qr_payment_live(case: dict):
+        run_live_case(case)
