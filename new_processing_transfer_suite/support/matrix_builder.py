@@ -41,6 +41,7 @@ CANONICAL_IPC_CARD_ACCOUNTS = {
 COMPASS_ONLY_CUSTOMERS = {
     "00909472",
 }
+EXPECTED_CREATE_FAILURE_BY_RECIPIENT_ACCOUNT: dict[str, dict[str, Any]] = {}
 DEFAULT_SELECTION_LIMIT = 2
 POSITIVE_SIGNAL_MAX_AGE_DAYS = 90
 SELECTION_SIGNAL_RANK = {
@@ -558,9 +559,15 @@ def _party_route_fragment(party: dict[str, Any] | None) -> str:
     return f"CURRENT:{processor}:{currency}"
 
 
-def _build_route_key(template: dict[str, Any], sender: dict[str, Any], recipient: dict[str, Any] | None) -> str:
+def _build_route_key(
+    template: dict[str, Any],
+    sender: dict[str, Any],
+    recipient: dict[str, Any] | None,
+    *,
+    request_payload: dict[str, Any] | None = None,
+) -> str:
     operation_code = template["operation"]["code"]
-    request = template["request"]
+    request = request_payload or template["request"]
 
     if operation_code == "MAKE_BANK_CLIENT_TRANSFER":
         prop_type = str(request.get("accountCreditPropType") or "UNKNOWN")
@@ -589,20 +596,118 @@ def _build_route_key(template: dict[str, Any], sender: dict[str, Any], recipient
     raise ValueError(f"Unsupported template operation.code={operation_code}")
 
 
-def _party_case_token(party: dict[str, Any]) -> str:
-    expected = party["expected"]
-    return (
-        f"{expected['currency'].lower()}_{expected['account_kind'].lower()}_{expected['processor'].lower()}_"
-        f"c{party['customer_no']}_a{party['account_no'][-4:]}"
+def _sanitize_card_mask(masked_pan: str | None) -> str:
+    sanitized: list[str] = []
+    for char in masked_pan or "":
+        if char.isdigit():
+            sanitized.append(char)
+        elif char == "*":
+            sanitized.append("x")
+    return "".join(sanitized)
+
+
+def _pan_last4(value: str | None) -> str:
+    digits = _digits_only(value)
+    return digits[-4:] if digits else ""
+
+
+def _runtime_name_prefix(case: dict[str, Any]) -> str:
+    return str(case.get("runtime_name_prefix") or case["name"])
+
+
+def _method_descriptor(case: dict[str, Any], *, request_payload: dict[str, Any] | None = None) -> str:
+    operation_code = case["operation"]["code"]
+    request = request_payload or case.get("request") or {}
+
+    if operation_code == "MAKE_OWN_ACCOUNTS_TRANSFER":
+        return "by_account_id"
+
+    if operation_code == "MAKE_BANK_CLIENT_TRANSFER":
+        prop_type = str(request.get("accountCreditPropType") or "").upper()
+        if prop_type == "ACCOUNT_NO":
+            return "by_account_no"
+        if prop_type == "CARD_NO":
+            return "by_card_no"
+        return f"by_{_slug(prop_type or 'unknown')}"
+
+    if operation_code == "MAKE_QR_PAYMENT":
+        return "by_qr_account"
+
+    if operation_code == "MAKE_OTHER_BANK_TRANSFER":
+        return "by_external_account"
+
+    return "by_unknown"
+
+
+def _party_runtime_descriptor(
+    case: dict[str, Any],
+    party: dict[str, Any] | None,
+    *,
+    role: str,
+    request_payload: dict[str, Any] | None = None,
+) -> str:
+    request = request_payload or case.get("request") or {}
+
+    if party is None:
+        external_target = (
+            request.get("accountCreditNumber")
+            or request.get("accountCreditPropValue")
+            or request.get("recipientAccNo")
+            or request.get("qrAccount")
+        )
+        if external_target:
+            return f"external_account_{external_target}"
+        return "external"
+
+    expected = party.get("expected") or {}
+    account_kind = str(expected.get("account_kind") or "").upper()
+    account_no = str(party.get("account_no") or "")
+    if account_kind != "CARD":
+        return f"account_{account_no}" if account_no else "account"
+
+    sanitized_mask = _sanitize_card_mask(party.get("card_mask"))
+    if (
+        role == "recipient"
+        and case["operation"]["code"] == "MAKE_BANK_CLIENT_TRANSFER"
+        and str(request.get("accountCreditPropType") or "").upper() == "CARD_NO"
+    ):
+        last4 = _pan_last4(party.get("card_no"))
+        if sanitized_mask and last4:
+            return f"{sanitized_mask}_pan_{last4}"
+        if last4:
+            return f"pan_{last4}"
+
+    if sanitized_mask:
+        return f"{sanitized_mask}_account_{account_no}"
+    if account_no:
+        return f"card_account_{account_no}"
+    return "card_account"
+
+
+def _build_case_name(
+    case: dict[str, Any],
+    sender: dict[str, Any],
+    recipient: dict[str, Any] | None,
+    *,
+    request_payload: dict[str, Any] | None = None,
+) -> str:
+    prefix = _runtime_name_prefix(case)
+    sender_descriptor = _party_runtime_descriptor(
+        case,
+        sender,
+        role="sender",
+        request_payload=request_payload,
     )
-
-
-def _build_case_name(template: dict[str, Any], sender: dict[str, Any], recipient: dict[str, Any] | None) -> str:
-    base = template["name"]
-    sender_token = _party_case_token(sender)
-    if recipient is None:
-        return f"{base}_{sender_token}"
-    return f"{base}_{sender_token}_to_{_party_case_token(recipient)}"
+    method_descriptor = _method_descriptor(case, request_payload=request_payload)
+    recipient_descriptor = _party_runtime_descriptor(
+        case,
+        recipient,
+        role="recipient",
+        request_payload=request_payload,
+    )
+    return (
+        f"{prefix}__from_{sender_descriptor}__via_{method_descriptor}__to_{recipient_descriptor}"
+    )
 
 
 def _apply_request_party_placeholders(request: dict[str, Any], recipient_party: dict[str, Any] | None) -> dict[str, Any]:
@@ -618,6 +723,32 @@ def _apply_request_party_placeholders(request: dict[str, Any], recipient_party: 
         else:
             normalized[key] = value
     return normalized
+
+
+def _normalize_qr_request_payload(
+    request: dict[str, Any],
+    recipient_party: dict[str, Any] | None,
+) -> dict[str, Any]:
+    normalized = dict(request)
+    normalized.pop("qrTransactionId", None)
+
+    recipient_kind = str(((recipient_party or {}).get("expected") or {}).get("account_kind") or "").upper()
+    if recipient_kind == "CARD":
+        normalized["qrServiceId"] = "02"
+    elif recipient_kind == "CURRENT":
+        normalized["qrServiceId"] = "01"
+
+    return normalized
+
+
+def _apply_runtime_case_name(case: dict[str, Any]) -> dict[str, Any]:
+    case["name"] = _build_case_name(
+        case,
+        case["sender"],
+        case.get("recipient"),
+        request_payload=case.get("request"),
+    )
+    return case
 
 
 def _template_coverage(template: dict[str, Any]) -> dict[str, Any]:
@@ -661,6 +792,8 @@ def _build_generated_case(
     recipient_account: dict[str, Any] | None,
 ) -> dict[str, Any]:
     request_payload = _apply_request_party_placeholders(_deep_copy(template["request"]), recipient_party)
+    if template["operation"]["code"] == "MAKE_QR_PAYMENT":
+        request_payload = _normalize_qr_request_payload(request_payload, recipient_party)
     preferred_card_signatures = _template_preferred_card_signatures(template)
     preferred_card_used = any(
         bool(party and party.get("preferred_card_used"))
@@ -673,9 +806,19 @@ def _build_generated_case(
     )
     coverage_bucket = _coverage_bucket_from_template(template)
     case = {
-        "name": _build_case_name(template, sender_party, recipient_party),
+        "name": _build_case_name(
+            template,
+            sender_party,
+            recipient_party,
+            request_payload=request_payload,
+        ),
         "enabled": True,
-        "route_key": _build_route_key(template, sender_party, recipient_party),
+        "route_key": _build_route_key(
+            template,
+            sender_party,
+            recipient_party,
+            request_payload=request_payload,
+        ),
         "operation": _deep_copy(template["operation"]),
         "sender": _normalize_explicit_party(sender_party),
         "request": request_payload,
@@ -700,6 +843,28 @@ def _build_generated_case(
     for key in ("device_type", "user_agent", "otp", "skip_on_create_error_codes"):
         if key in template:
             case[key] = _deep_copy(template[key])
+    return case
+
+
+def _apply_runtime_expectations(case: dict[str, Any]) -> dict[str, Any]:
+    recipient_account_no = str(((case.get("recipient") or {}).get("account_no")) or "")
+    expectation = EXPECTED_CREATE_FAILURE_BY_RECIPIENT_ACCOUNT.get(recipient_account_no)
+    if not expectation:
+        return case
+
+    verification = case.setdefault("verification", {})
+    expected_codes = list(expectation.get("expected_create_error_codes") or [])
+    if expected_codes:
+        verification["expected_create_error_codes"] = expected_codes
+
+    reason = str(expectation.get("negative_case_reason") or "").strip()
+    if reason:
+        case["negative_case_reason"] = reason
+        case.setdefault("selection_metadata", {})["negative_case_reason"] = reason
+
+    if expected_codes:
+        case.setdefault("selection_metadata", {})["expected_create_error_codes"] = expected_codes
+
     return case
 
 
@@ -1155,9 +1320,10 @@ def build_case_matrices() -> dict[Path, list[dict[str, Any]]]:
                 "Enabled explicit case is outside the card-focused active suite. "
                 f"case={case['name']}, route_key={case['route_key']}"
             )
-        enabled_cases.append(_deep_copy(case))
+        enabled_cases.append(_apply_runtime_case_name(_deep_copy(case)))
 
     enabled_cases = [case for case in enabled_cases if _case_is_card_focused(case)]
+    enabled_cases = [_apply_runtime_expectations(case) for case in enabled_cases]
     selected_cases = _prefer_fast_cases(enabled_cases)
 
     for case in selected_cases:

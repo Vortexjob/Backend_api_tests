@@ -1,21 +1,21 @@
 [
   {
-    "name": "bank_client_fx_card_to_current_by_account_kgs_card_ipc_c00575749_a6290_to_usd_current_none_c00909471_a5513",
+    "name": "bank_client_fx_card_to_current_by_account__from_417748xxxxxx2293_account_1280016059312378__via_by_account_no__to_account_1280016059315513",
     "enabled": true,
-    "route_key": "MAKE_BANK_CLIENT_TRANSFER:ACCOUNT_NO:CARD:IPC:VISA:KGS->CURRENT:NONE:USD",
+    "route_key": "MAKE_BANK_CLIENT_TRANSFER:ACCOUNT_NO:CARD:COMPASS:VISA:KGS->CURRENT:NONE:USD",
     "operation": {
       "code": "MAKE_BANK_CLIENT_TRANSFER"
     },
     "sender": {
-      "customer_no": "00575749",
-      "account_no": "1285110000646290",
+      "customer_no": "00909472",
+      "account_no": "1280016059312378",
       "expected": {
         "currency": "KGS",
         "account_kind": "CARD",
-        "processor": "IPC",
+        "processor": "COMPASS",
         "card_system": "VISA"
       },
-      "card_mask": "4446 **** **** 4945"
+      "card_mask": "417748******2293"
     },
     "request": {
       "accountCreditPropType": "ACCOUNT_NO",
@@ -43,7 +43,7 @@
     "preferred_card_used": false,
     "selection_metadata": {
       "template_name": "bank_client_fx_card_to_current_by_account",
-      "sender_is_default": true,
+      "sender_is_default": false,
       "recipient_is_default": false,
       "coverage": {
         "family": "bank_client",
@@ -69,22 +69,22 @@
     "selection_signal": "exact_history"
   },
   {
-    "name": "bank_client_same_currency_card_to_current_by_account_kgs_card_ipc_c00575749_a6290_to_kgs_current_none_c00909471_a0964",
+    "name": "bank_client_same_currency_card_to_current_by_account__from_417748xxxxxx2293_account_1280016059312378__via_by_account_no__to_account_1280016059310964",
     "enabled": true,
-    "route_key": "MAKE_BANK_CLIENT_TRANSFER:ACCOUNT_NO:CARD:IPC:VISA:KGS->CURRENT:NONE:KGS",
+    "route_key": "MAKE_BANK_CLIENT_TRANSFER:ACCOUNT_NO:CARD:COMPASS:VISA:KGS->CURRENT:NONE:KGS",
     "operation": {
       "code": "MAKE_BANK_CLIENT_TRANSFER"
     },
     "sender": {
-      "customer_no": "00575749",
-      "account_no": "1285110000646290",
+      "customer_no": "00909472",
+      "account_no": "1280016059312378",
       "expected": {
         "currency": "KGS",
         "account_kind": "CARD",
-        "processor": "IPC",
+        "processor": "COMPASS",
         "card_system": "VISA"
       },
-      "card_mask": "4446 **** **** 4945"
+      "card_mask": "417748******2293"
     },
     "request": {
       "accountCreditPropType": "ACCOUNT_NO",
@@ -112,8 +112,8 @@
     "preferred_card_used": false,
     "selection_metadata": {
       "template_name": "bank_client_same_currency_card_to_current_by_account",
-      "sender_is_default": true,
-      "recipient_is_default": true,
+      "sender_is_default": false,
+      "recipient_is_default": false,
       "coverage": {
         "family": "bank_client",
         "transfer_mode": "same_currency",
@@ -138,22 +138,22 @@
     "selection_signal": "exact_history"
   },
   {
-    "name": "bank_client_same_currency_card_to_current_by_account_kgs_card_ipc_c00575749_a6290_to_kgs_current_none_c00909471_a5210",
+    "name": "bank_client_same_currency_card_to_current_by_account__from_417748xxxxxx2293_account_1280016059312378__via_by_account_no__to_account_1280016059315210",
     "enabled": true,
-    "route_key": "MAKE_BANK_CLIENT_TRANSFER:ACCOUNT_NO:CARD:IPC:VISA:KGS->CURRENT:NONE:KGS",
+    "route_key": "MAKE_BANK_CLIENT_TRANSFER:ACCOUNT_NO:CARD:COMPASS:VISA:KGS->CURRENT:NONE:KGS",
     "operation": {
       "code": "MAKE_BANK_CLIENT_TRANSFER"
     },
     "sender": {
-      "customer_no": "00575749",
-      "account_no": "1285110000646290",
+      "customer_no": "00909472",
+      "account_no": "1280016059312378",
       "expected": {
         "currency": "KGS",
         "account_kind": "CARD",
-        "processor": "IPC",
+        "processor": "COMPASS",
         "card_system": "VISA"
       },
-      "card_mask": "4446 **** **** 4945"
+      "card_mask": "417748******2293"
     },
     "request": {
       "accountCreditPropType": "ACCOUNT_NO",
@@ -181,7 +181,7 @@
     "preferred_card_used": false,
     "selection_metadata": {
       "template_name": "bank_client_same_currency_card_to_current_by_account",
-      "sender_is_default": true,
+      "sender_is_default": false,
       "recipient_is_default": false,
       "coverage": {
         "family": "bank_client",

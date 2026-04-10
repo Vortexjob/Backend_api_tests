@@ -27,7 +27,6 @@ COMMON_CREATE_SKIP_ERROR_CODES = {
 SENTINEL_TOMORROW = "__TOMORROW__"
 SENTINEL_NEXT_BUSINESS_DAY = "__NEXT_BUSINESS_DAY__"
 SENTINEL_AMOUNT = "__AMOUNT__"
-SENTINEL_UNIQUE_QR_TXN_ID = "__UNIQUE_QR_TXN_ID__"
 
 
 @lru_cache(maxsize=1)
@@ -125,8 +124,6 @@ def _normalize_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
             normalized[key] = _next_business_date(1)
         elif value == SENTINEL_AMOUNT:
             normalized[key] = raw_amount
-        elif value == SENTINEL_UNIQUE_QR_TXN_ID:
-            normalized[key] = f"{time.strftime('%m%d%H%M%S')}{int(time.time() * 1000) % 1000:03d}"
         else:
             normalized[key] = value
     return normalized
@@ -247,6 +244,38 @@ def _create_request_with_session_retry(
         pytest.skip(f"Could not find a usable session_key for customer_no={sender_customer_no}")
 
     return "", last_response
+
+
+def _handle_expected_create_failure(case: dict[str, Any], response: Any) -> bool:
+    verification = case.get("verification") or {}
+    raw_expected_codes = verification.get("expected_create_error_codes")
+    if not raw_expected_codes:
+        return False
+
+    if isinstance(raw_expected_codes, str):
+        expected_codes = {raw_expected_codes}
+    else:
+        expected_codes = {str(item) for item in raw_expected_codes if item}
+
+    if getattr(response, "success", False):
+        pytest.fail(
+            f"{case['name']}: create unexpectedly succeeded, "
+            f"but negative-case expected one of error codes {sorted(expected_codes)}"
+        )
+
+    actual_code = _get_transaction_error_code(response)
+    actual_data = _get_transaction_error_data(response)
+    if actual_code in expected_codes:
+        print(
+            f"[create] expected failure observed: error_code={actual_code}, "
+            f"error_data={actual_data}, reason={case.get('negative_case_reason', '')}"
+        )
+        return True
+
+    pytest.fail(
+        f"{case['name']}: create failed with unexpected error_code={actual_code}, "
+        f"expected one of {sorted(expected_codes)}, error_data={actual_data}"
+    )
 
 
 def _resolve_sender_account(collector: DataCollector, case: dict[str, Any]) -> dict[str, Any]:
@@ -639,7 +668,6 @@ def _verify_success_transaction(
             "qrAccount",
             "qrMcc",
             "qrCcy",
-            "qrTransactionId",
             "qrServiceName",
             "qrComment",
             "qrControlSum",
@@ -700,6 +728,9 @@ def run_live_case(case: dict[str, Any]) -> None:
         case=case,
         payload=payload,
     )
+
+    if _handle_expected_create_failure(case, create_response):
+        return
 
     assert_success(create_response, f"{case['name']} - create")
 

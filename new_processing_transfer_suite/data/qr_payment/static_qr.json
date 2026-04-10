@@ -1,8 +1,8 @@
 [
   {
-    "name": "qr_internal_card_to_account_kgs_card_ipc_c00575749_a6290_to_kgs_current_none_c00909471_a0964",
+    "name": "qr_internal_card_to_account__from_4446xxxxxxxx4945_account_1285110000646290__via_by_qr_account__to_account_1280016059310964",
     "enabled": true,
-    "route_key": "MAKE_QR_PAYMENT:P2P_KICB_NET_STATIC_02:CARD:IPC:VISA:KGS->CURRENT:NONE:KGS",
+    "route_key": "MAKE_QR_PAYMENT:P2P_KICB_NET_STATIC_01:CARD:IPC:VISA:KGS->CURRENT:NONE:KGS",
     "operation": {
       "code": "MAKE_QR_PAYMENT"
     },
@@ -23,90 +23,10 @@
       "qrType": "STATIC",
       "qrMerchantProviderId": "p2p.kicb.net",
       "amount": "10",
-      "qrServiceId": "02",
+      "qrServiceId": "01",
       "qrAccount": "1280016059310964",
       "qrMcc": "9999",
       "qrCcy": "417",
-      "qrTransactionId": "__UNIQUE_QR_TXN_ID__",
-      "qrServiceName": "Internal QR",
-      "qrAccountChangeable": false,
-      "qrControlSum": "__AMOUNT__"
-    },
-    "verification": {
-      "sender_balance_observable": true,
-      "recipient_balance_observable": true,
-      "statement_fallback_allowed": true,
-      "expected_status_internal": [
-        "ACCEPTED_NOT_PROCESSED",
-        "SUCCESS"
-      ],
-      "expected_status_external": [
-        "IN_PROCESS",
-        "SUCCESS"
-      ],
-      "pass_on_timeout_if_last_status_matches": true,
-      "skip_balance_check_for_processing_state": true
-    },
-    "selection_limit": 2,
-    "force_active": true,
-    "coverage_bucket": "qr_same_currency_c2a_not_applicable_qr_account",
-    "preferred_card_used": false,
-    "selection_metadata": {
-      "template_name": "qr_internal_card_to_account",
-      "sender_is_default": true,
-      "recipient_is_default": true,
-      "coverage": {
-        "family": "qr",
-        "transfer_mode": "same_currency",
-        "shape": "c2a",
-        "provider_relation": "not_applicable",
-        "credit_addressing_mode": "QR_ACCOUNT"
-      },
-      "coverage_bucket": "qr_same_currency_c2a_not_applicable_qr_account",
-      "force_active": true,
-      "preferred_card_used": false,
-      "selection_signal": "forced_matrix"
-    },
-    "recipient": {
-      "customer_no": "00909471",
-      "account_no": "1280016059310964",
-      "expected": {
-        "currency": "KGS",
-        "account_kind": "CURRENT",
-        "processor": "NONE"
-      }
-    },
-    "selection_signal": "forced_matrix"
-  },
-  {
-    "name": "qr_internal_card_to_account_kgs_card_ipc_c00575749_a6290_to_kgs_current_none_c00909471_a5210",
-    "enabled": true,
-    "route_key": "MAKE_QR_PAYMENT:P2P_KICB_NET_STATIC_02:CARD:IPC:VISA:KGS->CURRENT:NONE:KGS",
-    "operation": {
-      "code": "MAKE_QR_PAYMENT"
-    },
-    "sender": {
-      "customer_no": "00575749",
-      "account_no": "1285110000646290",
-      "expected": {
-        "currency": "KGS",
-        "account_kind": "CARD",
-        "processor": "IPC",
-        "card_system": "VISA"
-      },
-      "card_mask": "4446 **** **** 4945"
-    },
-    "request": {
-      "clientType": "1",
-      "qrVersion": "01",
-      "qrType": "STATIC",
-      "qrMerchantProviderId": "p2p.kicb.net",
-      "amount": "10",
-      "qrServiceId": "02",
-      "qrAccount": "1280016059315210",
-      "qrMcc": "9999",
-      "qrCcy": "417",
-      "qrTransactionId": "__UNIQUE_QR_TXN_ID__",
       "qrServiceName": "Internal QR",
       "qrAccountChangeable": false,
       "qrControlSum": "__AMOUNT__"
@@ -148,7 +68,7 @@
     },
     "recipient": {
       "customer_no": "00909471",
-      "account_no": "1280016059315210",
+      "account_no": "1280016059310964",
       "expected": {
         "currency": "KGS",
         "account_kind": "CURRENT",
@@ -158,7 +78,165 @@
     "selection_signal": "forced_matrix"
   },
   {
-    "name": "qr_internal_card_to_card_cross_provider_kgs_card_ipc_c00575749_a6290_to_kgs_card_compass_c00909471_a2075",
+    "name": "qr_internal_card_to_account__from_4446xxxxxxxx5141_account_1285110000646290__via_by_qr_account__to_account_1280016059310964",
+    "enabled": true,
+    "route_key": "MAKE_QR_PAYMENT:P2P_KICB_NET_STATIC_01:CARD:IPC:VISA:KGS->CURRENT:NONE:KGS",
+    "operation": {
+      "code": "MAKE_QR_PAYMENT"
+    },
+    "sender": {
+      "customer_no": "00575749",
+      "account_no": "1285110000646290",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CARD",
+        "processor": "IPC",
+        "card_system": "VISA"
+      },
+      "card_mask": "4446 **** **** 5141"
+    },
+    "request": {
+      "clientType": "1",
+      "qrVersion": "01",
+      "qrType": "STATIC",
+      "qrMerchantProviderId": "p2p.kicb.net",
+      "amount": "10",
+      "qrServiceId": "01",
+      "qrAccount": "1280016059310964",
+      "qrMcc": "9999",
+      "qrCcy": "417",
+      "qrServiceName": "Internal QR",
+      "qrAccountChangeable": false,
+      "qrControlSum": "__AMOUNT__"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "selection_limit": 2,
+    "force_active": true,
+    "coverage_bucket": "qr_same_currency_c2a_not_applicable_qr_account",
+    "preferred_card_used": false,
+    "selection_metadata": {
+      "template_name": "qr_internal_card_to_account",
+      "sender_is_default": false,
+      "recipient_is_default": false,
+      "coverage": {
+        "family": "qr",
+        "transfer_mode": "same_currency",
+        "shape": "c2a",
+        "provider_relation": "not_applicable",
+        "credit_addressing_mode": "QR_ACCOUNT"
+      },
+      "coverage_bucket": "qr_same_currency_c2a_not_applicable_qr_account",
+      "force_active": true,
+      "preferred_card_used": false,
+      "selection_signal": "forced_matrix"
+    },
+    "recipient": {
+      "customer_no": "00909471",
+      "account_no": "1280016059310964",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CURRENT",
+        "processor": "NONE"
+      }
+    },
+    "selection_signal": "forced_matrix"
+  },
+  {
+    "name": "qr_internal_card_to_card_cross_provider__from_4446xxxxxxxx4945_account_1285110000646290__via_by_qr_account__to_417748xxxxxx7142_account_1280016059312580",
+    "enabled": true,
+    "route_key": "MAKE_QR_PAYMENT:P2P_KICB_NET_STATIC_02:CARD:IPC:VISA:KGS->CARD:COMPASS:VISA:KGS",
+    "operation": {
+      "code": "MAKE_QR_PAYMENT"
+    },
+    "sender": {
+      "customer_no": "00575749",
+      "account_no": "1285110000646290",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CARD",
+        "processor": "IPC",
+        "card_system": "VISA"
+      },
+      "card_mask": "4446 **** **** 4945"
+    },
+    "request": {
+      "clientType": "1",
+      "qrVersion": "01",
+      "qrType": "STATIC",
+      "qrMerchantProviderId": "p2p.kicb.net",
+      "amount": "10",
+      "qrServiceId": "02",
+      "qrAccount": "1280016059312580",
+      "qrMcc": "9999",
+      "qrCcy": "417",
+      "qrServiceName": "Internal QR",
+      "qrAccountChangeable": false,
+      "qrControlSum": "__AMOUNT__"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "selection_limit": 2,
+    "force_active": true,
+    "coverage_bucket": "qr_same_currency_c2c_cross_provider_qr_account",
+    "preferred_card_used": false,
+    "selection_metadata": {
+      "template_name": "qr_internal_card_to_card_cross_provider",
+      "sender_is_default": true,
+      "recipient_is_default": true,
+      "coverage": {
+        "family": "qr",
+        "transfer_mode": "same_currency",
+        "shape": "c2c",
+        "provider_relation": "cross_provider",
+        "credit_addressing_mode": "QR_ACCOUNT"
+      },
+      "coverage_bucket": "qr_same_currency_c2c_cross_provider_qr_account",
+      "force_active": true,
+      "preferred_card_used": false,
+      "selection_signal": "forced_matrix"
+    },
+    "recipient": {
+      "customer_no": "00909472",
+      "account_no": "1280016059312580",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CARD",
+        "processor": "COMPASS",
+        "card_system": "VISA"
+      },
+      "card_mask": "417748******7142"
+    },
+    "selection_signal": "forced_matrix"
+  },
+  {
+    "name": "qr_internal_card_to_card_cross_provider__from_4446xxxxxxxx4945_account_1285110000646290__via_by_qr_account__to_526247xxxxxx0628_account_1280016059312075",
     "enabled": true,
     "route_key": "MAKE_QR_PAYMENT:P2P_KICB_NET_STATIC_02:CARD:IPC:VISA:KGS->CARD:COMPASS:MASTERCARD:KGS",
     "operation": {
@@ -185,7 +263,6 @@
       "qrAccount": "1280016059312075",
       "qrMcc": "9999",
       "qrCcy": "417",
-      "qrTransactionId": "__UNIQUE_QR_TXN_ID__",
       "qrServiceName": "Internal QR",
       "qrAccountChangeable": false,
       "qrControlSum": "__AMOUNT__"
@@ -239,7 +316,7 @@
     "selection_signal": "forced_matrix"
   },
   {
-    "name": "qr_internal_card_to_card_cross_provider_kgs_card_ipc_c00575749_a6290_to_kgs_card_compass_c00909472_a2378",
+    "name": "qr_internal_card_to_card_cross_provider__from_4446xxxxxxxx5141_account_1285110000646290__via_by_qr_account__to_417748xxxxxx7142_account_1280016059312580",
     "enabled": true,
     "route_key": "MAKE_QR_PAYMENT:P2P_KICB_NET_STATIC_02:CARD:IPC:VISA:KGS->CARD:COMPASS:VISA:KGS",
     "operation": {
@@ -254,88 +331,7 @@
         "processor": "IPC",
         "card_system": "VISA"
       },
-      "card_mask": "4446 **** **** 4945"
-    },
-    "request": {
-      "clientType": "1",
-      "qrVersion": "01",
-      "qrType": "STATIC",
-      "qrMerchantProviderId": "p2p.kicb.net",
-      "amount": "10",
-      "qrServiceId": "02",
-      "qrAccount": "1280016059312378",
-      "qrMcc": "9999",
-      "qrCcy": "417",
-      "qrTransactionId": "__UNIQUE_QR_TXN_ID__",
-      "qrServiceName": "Internal QR",
-      "qrAccountChangeable": false,
-      "qrControlSum": "__AMOUNT__"
-    },
-    "verification": {
-      "sender_balance_observable": true,
-      "recipient_balance_observable": true,
-      "statement_fallback_allowed": true,
-      "expected_status_internal": [
-        "ACCEPTED_NOT_PROCESSED",
-        "SUCCESS"
-      ],
-      "expected_status_external": [
-        "IN_PROCESS",
-        "SUCCESS"
-      ],
-      "pass_on_timeout_if_last_status_matches": true,
-      "skip_balance_check_for_processing_state": true
-    },
-    "selection_limit": 2,
-    "force_active": true,
-    "coverage_bucket": "qr_same_currency_c2c_cross_provider_qr_account",
-    "preferred_card_used": false,
-    "selection_metadata": {
-      "template_name": "qr_internal_card_to_card_cross_provider",
-      "sender_is_default": true,
-      "recipient_is_default": false,
-      "coverage": {
-        "family": "qr",
-        "transfer_mode": "same_currency",
-        "shape": "c2c",
-        "provider_relation": "cross_provider",
-        "credit_addressing_mode": "QR_ACCOUNT"
-      },
-      "coverage_bucket": "qr_same_currency_c2c_cross_provider_qr_account",
-      "force_active": true,
-      "preferred_card_used": false,
-      "selection_signal": "forced_matrix"
-    },
-    "recipient": {
-      "customer_no": "00909472",
-      "account_no": "1280016059312378",
-      "expected": {
-        "currency": "KGS",
-        "account_kind": "CARD",
-        "processor": "COMPASS",
-        "card_system": "VISA"
-      },
-      "card_mask": "417748******2293"
-    },
-    "selection_signal": "forced_matrix"
-  },
-  {
-    "name": "qr_internal_card_to_card_cross_provider_kgs_card_ipc_c00575749_a6290_to_kgs_card_compass_c00909472_a2580",
-    "enabled": true,
-    "route_key": "MAKE_QR_PAYMENT:P2P_KICB_NET_STATIC_02:CARD:IPC:VISA:KGS->CARD:COMPASS:VISA:KGS",
-    "operation": {
-      "code": "MAKE_QR_PAYMENT"
-    },
-    "sender": {
-      "customer_no": "00575749",
-      "account_no": "1285110000646290",
-      "expected": {
-        "currency": "KGS",
-        "account_kind": "CARD",
-        "processor": "IPC",
-        "card_system": "VISA"
-      },
-      "card_mask": "4446 **** **** 4945"
+      "card_mask": "4446 **** **** 5141"
     },
     "request": {
       "clientType": "1",
@@ -347,7 +343,6 @@
       "qrAccount": "1280016059312580",
       "qrMcc": "9999",
       "qrCcy": "417",
-      "qrTransactionId": "__UNIQUE_QR_TXN_ID__",
       "qrServiceName": "Internal QR",
       "qrAccountChangeable": false,
       "qrControlSum": "__AMOUNT__"
@@ -373,7 +368,7 @@
     "preferred_card_used": false,
     "selection_metadata": {
       "template_name": "qr_internal_card_to_card_cross_provider",
-      "sender_is_default": true,
+      "sender_is_default": false,
       "recipient_is_default": true,
       "coverage": {
         "family": "qr",
@@ -397,6 +392,86 @@
         "card_system": "VISA"
       },
       "card_mask": "417748******7142"
+    },
+    "selection_signal": "forced_matrix"
+  },
+  {
+    "name": "qr_internal_card_to_card_cross_provider__from_4446xxxxxxxx5141_account_1285110000646290__via_by_qr_account__to_526247xxxxxx0628_account_1280016059312075",
+    "enabled": true,
+    "route_key": "MAKE_QR_PAYMENT:P2P_KICB_NET_STATIC_02:CARD:IPC:VISA:KGS->CARD:COMPASS:MASTERCARD:KGS",
+    "operation": {
+      "code": "MAKE_QR_PAYMENT"
+    },
+    "sender": {
+      "customer_no": "00575749",
+      "account_no": "1285110000646290",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CARD",
+        "processor": "IPC",
+        "card_system": "VISA"
+      },
+      "card_mask": "4446 **** **** 5141"
+    },
+    "request": {
+      "clientType": "1",
+      "qrVersion": "01",
+      "qrType": "STATIC",
+      "qrMerchantProviderId": "p2p.kicb.net",
+      "amount": "10",
+      "qrServiceId": "02",
+      "qrAccount": "1280016059312075",
+      "qrMcc": "9999",
+      "qrCcy": "417",
+      "qrServiceName": "Internal QR",
+      "qrAccountChangeable": false,
+      "qrControlSum": "__AMOUNT__"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "selection_limit": 2,
+    "force_active": true,
+    "coverage_bucket": "qr_same_currency_c2c_cross_provider_qr_account",
+    "preferred_card_used": false,
+    "selection_metadata": {
+      "template_name": "qr_internal_card_to_card_cross_provider",
+      "sender_is_default": false,
+      "recipient_is_default": false,
+      "coverage": {
+        "family": "qr",
+        "transfer_mode": "same_currency",
+        "shape": "c2c",
+        "provider_relation": "cross_provider",
+        "credit_addressing_mode": "QR_ACCOUNT"
+      },
+      "coverage_bucket": "qr_same_currency_c2c_cross_provider_qr_account",
+      "force_active": true,
+      "preferred_card_used": false,
+      "selection_signal": "forced_matrix"
+    },
+    "recipient": {
+      "customer_no": "00909471",
+      "account_no": "1280016059312075",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CARD",
+        "processor": "COMPASS",
+        "card_system": "MASTERCARD"
+      },
+      "card_mask": "526247******0628"
     },
     "selection_signal": "forced_matrix"
   }

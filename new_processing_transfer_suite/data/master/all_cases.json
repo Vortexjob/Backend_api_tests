@@ -2252,7 +2252,6 @@
       "qrAccount": "__RECIPIENT_ACCOUNT_NO__",
       "qrMcc": "9999",
       "qrCcy": "417",
-      "qrTransactionId": "__UNIQUE_QR_TXN_ID__",
       "qrServiceName": "Internal QR",
       "qrAccountChangeable": false,
       "qrControlSum": "__AMOUNT__"
@@ -2341,7 +2340,6 @@
       "qrAccount": "__RECIPIENT_ACCOUNT_NO__",
       "qrMcc": "9999",
       "qrCcy": "417",
-      "qrTransactionId": "__UNIQUE_QR_TXN_ID__",
       "qrServiceName": "Internal QR",
       "qrAccountChangeable": false,
       "qrControlSum": "__AMOUNT__"
@@ -2387,7 +2385,7 @@
     "name": "qr_internal_card_to_account",
     "enabled": true,
     "selection_limit": 2,
-    "route_key": "TEMPLATE:MAKE_QR_PAYMENT:INTERNAL:STATIC_02:CARD->CURRENT",
+    "route_key": "TEMPLATE:MAKE_QR_PAYMENT:INTERNAL:STATIC_01:CARD->CURRENT",
     "operation": {
       "code": "MAKE_QR_PAYMENT"
     },
@@ -2426,11 +2424,10 @@
       "qrType": "STATIC",
       "qrMerchantProviderId": "p2p.kicb.net",
       "amount": "10",
-      "qrServiceId": "02",
+      "qrServiceId": "01",
       "qrAccount": "__RECIPIENT_ACCOUNT_NO__",
       "qrMcc": "9999",
       "qrCcy": "417",
-      "qrTransactionId": "__UNIQUE_QR_TXN_ID__",
       "qrServiceName": "Internal QR",
       "qrAccountChangeable": false,
       "qrControlSum": "__AMOUNT__"
@@ -2469,6 +2466,7 @@
   },
   {
     "name": "bank_client_fx_current_to_card_probe_by_account_kgs_current_none_c00909469_a0762_to_usd_card_compass_c00909471_a1368",
+    "runtime_name_prefix": "bank_client_fx_current_to_card_probe_by_account",
     "enabled": true,
     "selection_limit": 1,
     "route_key": "MAKE_BANK_CLIENT_TRANSFER:ACCOUNT_NO:CURRENT:NONE:KGS->CARD:COMPASS:VISA:USD:PROBE_TARGET_00909471_A1368",
@@ -2543,6 +2541,7 @@
   },
   {
     "name": "bank_client_fx_current_to_card_probe_by_card_no_kgs_current_none_c00909469_a0762_to_usd_card_compass_c00909471_a1368",
+    "runtime_name_prefix": "bank_client_fx_current_to_card_probe_by_card_no",
     "enabled": true,
     "selection_limit": 1,
     "route_key": "MAKE_BANK_CLIENT_TRANSFER:CARD_NO:CURRENT:NONE:KGS->CARD:COMPASS:VISA:USD:PROBE_TARGET_00909471_A1368",

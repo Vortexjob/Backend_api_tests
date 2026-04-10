@@ -1,6 +1,6 @@
 [
   {
-    "name": "bank_client_fx_current_to_card_by_account_kgs_current_none_c00909471_a0964_to_usd_card_compass_c00909472_a2681",
+    "name": "bank_client_fx_current_to_card_by_account__from_account_1280016059310964__via_by_account_no__to_417748xxxxxx2731_account_1280016059312681",
     "enabled": true,
     "route_key": "MAKE_BANK_CLIENT_TRANSFER:ACCOUNT_NO:CURRENT:NONE:KGS->CARD:COMPASS:VISA:USD",
     "operation": {
@@ -41,7 +41,7 @@
     "preferred_card_used": false,
     "selection_metadata": {
       "template_name": "bank_client_fx_current_to_card_by_account",
-      "sender_is_default": true,
+      "sender_is_default": false,
       "recipient_is_default": false,
       "coverage": {
         "family": "bank_client",
@@ -69,7 +69,7 @@
     "selection_signal": "exact_history"
   },
   {
-    "name": "bank_client_fx_current_to_card_by_account_kgs_current_none_c00909471_a0964_to_usd_card_compass_c00909472_a2984",
+    "name": "bank_client_fx_current_to_card_by_account__from_account_1280016059310964__via_by_account_no__to_526247xxxxxx3365_account_1280016059312984",
     "enabled": true,
     "route_key": "MAKE_BANK_CLIENT_TRANSFER:ACCOUNT_NO:CURRENT:NONE:KGS->CARD:COMPASS:MASTERCARD:USD",
     "operation": {
@@ -110,7 +110,7 @@
     "preferred_card_used": false,
     "selection_metadata": {
       "template_name": "bank_client_fx_current_to_card_by_account",
-      "sender_is_default": true,
+      "sender_is_default": false,
       "recipient_is_default": false,
       "coverage": {
         "family": "bank_client",
@@ -138,7 +138,8 @@
     "selection_signal": "exact_history"
   },
   {
-    "name": "bank_client_fx_current_to_card_probe_by_account_kgs_current_none_c00909469_a0762_to_usd_card_compass_c00909471_a1368",
+    "name": "bank_client_fx_current_to_card_probe_by_account__from_account_1280016059310762__via_by_account_no__to_417748xxxxxx8335_account_1280016059311368",
+    "runtime_name_prefix": "bank_client_fx_current_to_card_probe_by_account",
     "enabled": true,
     "selection_limit": 1,
     "route_key": "MAKE_BANK_CLIENT_TRANSFER:ACCOUNT_NO:CURRENT:NONE:KGS->CARD:COMPASS:VISA:USD:PROBE_TARGET_00909471_A1368",
@@ -214,7 +215,8 @@
     "selection_signal": "exact_history"
   },
   {
-    "name": "bank_client_fx_current_to_card_probe_by_card_no_kgs_current_none_c00909469_a0762_to_usd_card_compass_c00909471_a1368",
+    "name": "bank_client_fx_current_to_card_probe_by_card_no__from_account_1280016059310762__via_by_card_no__to_417748xxxxxx8335_pan_8335",
+    "runtime_name_prefix": "bank_client_fx_current_to_card_probe_by_card_no",
     "enabled": true,
     "selection_limit": 1,
     "route_key": "MAKE_BANK_CLIENT_TRANSFER:CARD_NO:CURRENT:NONE:KGS->CARD:COMPASS:VISA:USD:PROBE_TARGET_00909471_A1368",
@@ -291,7 +293,7 @@
     "selection_signal": "exact_history"
   },
   {
-    "name": "bank_client_same_currency_current_to_card_by_account_kgs_current_none_c00909471_a0964_to_kgs_card_compass_c00909472_a2378",
+    "name": "bank_client_same_currency_current_to_card_by_account__from_account_1280016059310964__via_by_account_no__to_417748xxxxxx2293_account_1280016059312378",
     "enabled": true,
     "route_key": "MAKE_BANK_CLIENT_TRANSFER:ACCOUNT_NO:CURRENT:NONE:KGS->CARD:COMPASS:VISA:KGS",
     "operation": {
@@ -332,7 +334,7 @@
     "preferred_card_used": false,
     "selection_metadata": {
       "template_name": "bank_client_same_currency_current_to_card_by_account",
-      "sender_is_default": true,
+      "sender_is_default": false,
       "recipient_is_default": false,
       "coverage": {
         "family": "bank_client",
@@ -360,7 +362,7 @@
     "selection_signal": "exact_history"
   },
   {
-    "name": "bank_client_same_currency_current_to_card_by_account_kgs_current_none_c00909471_a0964_to_kgs_card_compass_c00909472_a2580",
+    "name": "bank_client_same_currency_current_to_card_by_account__from_account_1280016059310964__via_by_account_no__to_417748xxxxxx7142_account_1280016059312580",
     "enabled": true,
     "route_key": "MAKE_BANK_CLIENT_TRANSFER:ACCOUNT_NO:CURRENT:NONE:KGS->CARD:COMPASS:VISA:KGS",
     "operation": {
@@ -401,7 +403,7 @@
     "preferred_card_used": false,
     "selection_metadata": {
       "template_name": "bank_client_same_currency_current_to_card_by_account",
-      "sender_is_default": true,
+      "sender_is_default": false,
       "recipient_is_default": true,
       "coverage": {
         "family": "bank_client",
@@ -429,7 +431,7 @@
     "selection_signal": "exact_history"
   },
   {
-    "name": "bank_client_same_currency_current_to_card_by_account_kgs_current_none_c00909471_a0964_to_kgs_card_ipc_c00575749_a6290",
+    "name": "bank_client_same_currency_current_to_card_by_account__from_account_1280016059310964__via_by_account_no__to_4446xxxxxxxx4945_account_1285110000646290",
     "enabled": true,
     "route_key": "MAKE_BANK_CLIENT_TRANSFER:ACCOUNT_NO:CURRENT:NONE:KGS->CARD:IPC:VISA:KGS",
     "operation": {
@@ -470,7 +472,7 @@
     "preferred_card_used": false,
     "selection_metadata": {
       "template_name": "bank_client_same_currency_current_to_card_by_account",
-      "sender_is_default": true,
+      "sender_is_default": false,
       "recipient_is_default": true,
       "coverage": {
         "family": "bank_client",
@@ -482,7 +484,7 @@
       "coverage_bucket": "bank_client_same_currency_a2c_not_applicable_account_no",
       "force_active": false,
       "preferred_card_used": false,
-      "selection_signal": "exact_history"
+      "selection_signal": "same_family_history"
     },
     "recipient": {
       "customer_no": "00575749",
@@ -495,12 +497,12 @@
       },
       "card_mask": "4446 **** **** 4945"
     },
-    "selection_signal": "exact_history"
+    "selection_signal": "same_family_history"
   },
   {
-    "name": "bank_client_same_currency_current_to_card_by_card_no_kgs_current_none_c00909471_a0964_to_kgs_card_ipc_c00575749_a6290",
+    "name": "bank_client_same_currency_current_to_card_by_account__from_account_1280016059310964__via_by_account_no__to_4446xxxxxxxx5141_account_1285110000646290",
     "enabled": true,
-    "route_key": "MAKE_BANK_CLIENT_TRANSFER:CARD_NO:CURRENT:NONE:KGS->CARD:IPC:VISA:KGS",
+    "route_key": "MAKE_BANK_CLIENT_TRANSFER:ACCOUNT_NO:CURRENT:NONE:KGS->CARD:IPC:VISA:KGS",
     "operation": {
       "code": "MAKE_BANK_CLIENT_TRANSFER"
     },
@@ -514,9 +516,9 @@
       }
     },
     "request": {
-      "accountCreditPropType": "CARD_NO",
+      "accountCreditPropType": "ACCOUNT_NO",
       "amountDebit": "1.00",
-      "paymentPurpose": "Template bank client same_currency current to card by card number"
+      "paymentPurpose": "Template bank client same_currency current to card by account"
     },
     "verification": {
       "sender_balance_observable": true,
@@ -535,23 +537,23 @@
     },
     "selection_limit": 2,
     "force_active": false,
-    "coverage_bucket": "bank_client_same_currency_a2c_not_applicable_card_no",
-    "preferred_card_used": true,
+    "coverage_bucket": "bank_client_same_currency_a2c_not_applicable_account_no",
+    "preferred_card_used": false,
     "selection_metadata": {
-      "template_name": "bank_client_same_currency_current_to_card_by_card_no",
-      "sender_is_default": true,
-      "recipient_is_default": true,
+      "template_name": "bank_client_same_currency_current_to_card_by_account",
+      "sender_is_default": false,
+      "recipient_is_default": false,
       "coverage": {
         "family": "bank_client",
         "transfer_mode": "same_currency",
         "shape": "a2c",
         "provider_relation": "not_applicable",
-        "credit_addressing_mode": "CARD_NO"
+        "credit_addressing_mode": "ACCOUNT_NO"
       },
-      "coverage_bucket": "bank_client_same_currency_a2c_not_applicable_card_no",
+      "coverage_bucket": "bank_client_same_currency_a2c_not_applicable_account_no",
       "force_active": false,
-      "preferred_card_used": true,
-      "selection_signal": "exact_history"
+      "preferred_card_used": false,
+      "selection_signal": "same_family_history"
     },
     "recipient": {
       "customer_no": "00575749",
@@ -562,10 +564,8 @@
         "processor": "IPC",
         "card_system": "VISA"
       },
-      "card_mask": "4446 **** **** 4945",
-      "card_no": "4446791000084945",
-      "preferred_card_used": true
+      "card_mask": "4446 **** **** 5141"
     },
-    "selection_signal": "exact_history"
+    "selection_signal": "same_family_history"
   }
 ]

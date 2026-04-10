@@ -1,6 +1,76 @@
 [
   {
-    "name": "own_accounts_fx_card_to_card_same_provider_kgs_card_compass_c00909471_a1469_to_eur_card_compass_c00909471_a1974",
+    "name": "own_accounts_fx_card_to_card_same_provider__from_417748xxxxxx0312_account_1280016059312277__via_by_account_id__to_417748xxxxxx8335_account_1280016059311368",
+    "enabled": true,
+    "route_key": "MAKE_OWN_ACCOUNTS_TRANSFER:FX:CARD:COMPASS:VISA:KGS->CARD:COMPASS:VISA:USD",
+    "operation": {
+      "code": "MAKE_OWN_ACCOUNTS_TRANSFER"
+    },
+    "sender": {
+      "customer_no": "00909471",
+      "account_no": "1280016059312277",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CARD",
+        "processor": "COMPASS",
+        "card_system": "VISA"
+      },
+      "card_mask": "417748******0312"
+    },
+    "request": {
+      "amountDebit": "1.00",
+      "paymentPurpose": "Template own accounts fx card to card same_provider"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "selection_limit": 2,
+    "force_active": true,
+    "coverage_bucket": "own_accounts_fx_c2c_same_provider_account_id",
+    "preferred_card_used": false,
+    "selection_metadata": {
+      "template_name": "own_accounts_fx_card_to_card_same_provider",
+      "sender_is_default": false,
+      "recipient_is_default": false,
+      "coverage": {
+        "family": "own_accounts",
+        "transfer_mode": "fx",
+        "shape": "c2c",
+        "provider_relation": "same_provider",
+        "credit_addressing_mode": "ACCOUNT_ID"
+      },
+      "coverage_bucket": "own_accounts_fx_c2c_same_provider_account_id",
+      "force_active": true,
+      "preferred_card_used": false,
+      "selection_signal": "exact_history"
+    },
+    "recipient": {
+      "customer_no": "00909471",
+      "account_no": "1280016059311368",
+      "expected": {
+        "currency": "USD",
+        "account_kind": "CARD",
+        "processor": "COMPASS",
+        "card_system": "VISA"
+      },
+      "card_mask": "417748******8335"
+    },
+    "selection_signal": "exact_history"
+  },
+  {
+    "name": "own_accounts_fx_card_to_card_same_provider__from_417748xxxxxx0312_account_1280016059312277__via_by_account_id__to_526247xxxxxx0127_account_1280016059311974",
     "enabled": true,
     "route_key": "MAKE_OWN_ACCOUNTS_TRANSFER:FX:CARD:COMPASS:VISA:KGS->CARD:COMPASS:MASTERCARD:EUR",
     "operation": {
@@ -8,14 +78,14 @@
     },
     "sender": {
       "customer_no": "00909471",
-      "account_no": "1280016059311469",
+      "account_no": "1280016059312277",
       "expected": {
         "currency": "KGS",
         "account_kind": "CARD",
         "processor": "COMPASS",
         "card_system": "VISA"
       },
-      "card_mask": "417748******1985"
+      "card_mask": "417748******0312"
     },
     "request": {
       "amountDebit": "1.00",
@@ -70,7 +140,77 @@
     "selection_signal": "exact_history"
   },
   {
-    "name": "own_accounts_fx_card_to_card_same_provider_kgs_card_compass_c00909471_a1469_to_usd_card_compass_c00909471_a1570",
+    "name": "own_accounts_fx_card_to_card_same_provider__from_417748xxxxxx0312_account_1280016059312277__via_by_account_id__to_526247xxxxxx0931_account_1280016059312176",
+    "enabled": true,
+    "route_key": "MAKE_OWN_ACCOUNTS_TRANSFER:FX:CARD:COMPASS:VISA:KGS->CARD:COMPASS:MASTERCARD:USD",
+    "operation": {
+      "code": "MAKE_OWN_ACCOUNTS_TRANSFER"
+    },
+    "sender": {
+      "customer_no": "00909471",
+      "account_no": "1280016059312277",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CARD",
+        "processor": "COMPASS",
+        "card_system": "VISA"
+      },
+      "card_mask": "417748******0312"
+    },
+    "request": {
+      "amountDebit": "1.00",
+      "paymentPurpose": "Template own accounts fx card to card same_provider"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "selection_limit": 2,
+    "force_active": true,
+    "coverage_bucket": "own_accounts_fx_c2c_same_provider_account_id",
+    "preferred_card_used": false,
+    "selection_metadata": {
+      "template_name": "own_accounts_fx_card_to_card_same_provider",
+      "sender_is_default": false,
+      "recipient_is_default": false,
+      "coverage": {
+        "family": "own_accounts",
+        "transfer_mode": "fx",
+        "shape": "c2c",
+        "provider_relation": "same_provider",
+        "credit_addressing_mode": "ACCOUNT_ID"
+      },
+      "coverage_bucket": "own_accounts_fx_c2c_same_provider_account_id",
+      "force_active": true,
+      "preferred_card_used": false,
+      "selection_signal": "exact_history"
+    },
+    "recipient": {
+      "customer_no": "00909471",
+      "account_no": "1280016059312176",
+      "expected": {
+        "currency": "USD",
+        "account_kind": "CARD",
+        "processor": "COMPASS",
+        "card_system": "MASTERCARD"
+      },
+      "card_mask": "526247******0931"
+    },
+    "selection_signal": "exact_history"
+  },
+  {
+    "name": "own_accounts_fx_card_to_card_same_provider__from_417748xxxxxx1985_account_1280016059311469__via_by_account_id__to_417748xxxxxx9100_account_1280016059311570",
     "enabled": true,
     "route_key": "MAKE_OWN_ACCOUNTS_TRANSFER:FX:CARD:COMPASS:VISA:KGS->CARD:COMPASS:VISA:USD",
     "operation": {
@@ -140,7 +280,77 @@
     "selection_signal": "exact_history"
   },
   {
-    "name": "own_accounts_fx_card_to_card_same_provider_kgs_card_compass_c00909471_a1469_to_usd_card_compass_c00909471_a2176",
+    "name": "own_accounts_fx_card_to_card_same_provider__from_417748xxxxxx1985_account_1280016059311469__via_by_account_id__to_526247xxxxxx0127_account_1280016059311974",
+    "enabled": true,
+    "route_key": "MAKE_OWN_ACCOUNTS_TRANSFER:FX:CARD:COMPASS:VISA:KGS->CARD:COMPASS:MASTERCARD:EUR",
+    "operation": {
+      "code": "MAKE_OWN_ACCOUNTS_TRANSFER"
+    },
+    "sender": {
+      "customer_no": "00909471",
+      "account_no": "1280016059311469",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CARD",
+        "processor": "COMPASS",
+        "card_system": "VISA"
+      },
+      "card_mask": "417748******1985"
+    },
+    "request": {
+      "amountDebit": "1.00",
+      "paymentPurpose": "Template own accounts fx card to card same_provider"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "selection_limit": 2,
+    "force_active": true,
+    "coverage_bucket": "own_accounts_fx_c2c_same_provider_account_id",
+    "preferred_card_used": false,
+    "selection_metadata": {
+      "template_name": "own_accounts_fx_card_to_card_same_provider",
+      "sender_is_default": false,
+      "recipient_is_default": false,
+      "coverage": {
+        "family": "own_accounts",
+        "transfer_mode": "fx",
+        "shape": "c2c",
+        "provider_relation": "same_provider",
+        "credit_addressing_mode": "ACCOUNT_ID"
+      },
+      "coverage_bucket": "own_accounts_fx_c2c_same_provider_account_id",
+      "force_active": true,
+      "preferred_card_used": false,
+      "selection_signal": "exact_history"
+    },
+    "recipient": {
+      "customer_no": "00909471",
+      "account_no": "1280016059311974",
+      "expected": {
+        "currency": "EUR",
+        "account_kind": "CARD",
+        "processor": "COMPASS",
+        "card_system": "MASTERCARD"
+      },
+      "card_mask": "526247******0127"
+    },
+    "selection_signal": "exact_history"
+  },
+  {
+    "name": "own_accounts_fx_card_to_card_same_provider__from_417748xxxxxx1985_account_1280016059311469__via_by_account_id__to_526247xxxxxx0931_account_1280016059312176",
     "enabled": true,
     "route_key": "MAKE_OWN_ACCOUNTS_TRANSFER:FX:CARD:COMPASS:VISA:KGS->CARD:COMPASS:MASTERCARD:USD",
     "operation": {
@@ -210,22 +420,22 @@
     "selection_signal": "exact_history"
   },
   {
-    "name": "own_accounts_fx_card_to_card_same_provider_kgs_card_compass_c00909471_a2277_to_eur_card_compass_c00909471_a1974",
+    "name": "own_accounts_fx_card_to_card_same_provider__from_417748xxxxxx9100_account_1280016059311570__via_by_account_id__to_417748xxxxxx0312_account_1280016059312277",
     "enabled": true,
-    "route_key": "MAKE_OWN_ACCOUNTS_TRANSFER:FX:CARD:COMPASS:VISA:KGS->CARD:COMPASS:MASTERCARD:EUR",
+    "route_key": "MAKE_OWN_ACCOUNTS_TRANSFER:FX:CARD:COMPASS:VISA:USD->CARD:COMPASS:VISA:KGS",
     "operation": {
       "code": "MAKE_OWN_ACCOUNTS_TRANSFER"
     },
     "sender": {
       "customer_no": "00909471",
-      "account_no": "1280016059312277",
+      "account_no": "1280016059311570",
       "expected": {
-        "currency": "KGS",
+        "currency": "USD",
         "account_kind": "CARD",
         "processor": "COMPASS",
         "card_system": "VISA"
       },
-      "card_mask": "417748******0312"
+      "card_mask": "417748******9100"
     },
     "request": {
       "amountDebit": "1.00",
@@ -268,26 +478,6 @@
     },
     "recipient": {
       "customer_no": "00909471",
-      "account_no": "1280016059311974",
-      "expected": {
-        "currency": "EUR",
-        "account_kind": "CARD",
-        "processor": "COMPASS",
-        "card_system": "MASTERCARD"
-      },
-      "card_mask": "526247******0127"
-    },
-    "selection_signal": "exact_history"
-  },
-  {
-    "name": "own_accounts_fx_card_to_card_same_provider_kgs_card_compass_c00909471_a2277_to_usd_card_compass_c00909471_a1368",
-    "enabled": true,
-    "route_key": "MAKE_OWN_ACCOUNTS_TRANSFER:FX:CARD:COMPASS:VISA:KGS->CARD:COMPASS:VISA:USD",
-    "operation": {
-      "code": "MAKE_OWN_ACCOUNTS_TRANSFER"
-    },
-    "sender": {
-      "customer_no": "00909471",
       "account_no": "1280016059312277",
       "expected": {
         "currency": "KGS",
@@ -297,75 +487,25 @@
       },
       "card_mask": "417748******0312"
     },
-    "request": {
-      "amountDebit": "1.00",
-      "paymentPurpose": "Template own accounts fx card to card same_provider"
+    "selection_signal": "exact_history"
+  },
+  {
+    "name": "own_accounts_fx_card_to_card_same_provider__from_417748xxxxxx9100_account_1280016059311570__via_by_account_id__to_417748xxxxxx1985_account_1280016059311469",
+    "enabled": true,
+    "route_key": "MAKE_OWN_ACCOUNTS_TRANSFER:FX:CARD:COMPASS:VISA:USD->CARD:COMPASS:VISA:KGS",
+    "operation": {
+      "code": "MAKE_OWN_ACCOUNTS_TRANSFER"
     },
-    "verification": {
-      "sender_balance_observable": true,
-      "recipient_balance_observable": true,
-      "statement_fallback_allowed": true,
-      "expected_status_internal": [
-        "ACCEPTED_NOT_PROCESSED",
-        "SUCCESS"
-      ],
-      "expected_status_external": [
-        "IN_PROCESS",
-        "SUCCESS"
-      ],
-      "pass_on_timeout_if_last_status_matches": true,
-      "skip_balance_check_for_processing_state": true
-    },
-    "selection_limit": 2,
-    "force_active": true,
-    "coverage_bucket": "own_accounts_fx_c2c_same_provider_account_id",
-    "preferred_card_used": false,
-    "selection_metadata": {
-      "template_name": "own_accounts_fx_card_to_card_same_provider",
-      "sender_is_default": false,
-      "recipient_is_default": false,
-      "coverage": {
-        "family": "own_accounts",
-        "transfer_mode": "fx",
-        "shape": "c2c",
-        "provider_relation": "same_provider",
-        "credit_addressing_mode": "ACCOUNT_ID"
-      },
-      "coverage_bucket": "own_accounts_fx_c2c_same_provider_account_id",
-      "force_active": true,
-      "preferred_card_used": false,
-      "selection_signal": "same_family_history"
-    },
-    "recipient": {
+    "sender": {
       "customer_no": "00909471",
-      "account_no": "1280016059311368",
+      "account_no": "1280016059311570",
       "expected": {
         "currency": "USD",
         "account_kind": "CARD",
         "processor": "COMPASS",
         "card_system": "VISA"
       },
-      "card_mask": "417748******8335"
-    },
-    "selection_signal": "same_family_history"
-  },
-  {
-    "name": "own_accounts_fx_card_to_card_same_provider_kgs_card_compass_c00909471_a2277_to_usd_card_compass_c00909471_a2176",
-    "enabled": true,
-    "route_key": "MAKE_OWN_ACCOUNTS_TRANSFER:FX:CARD:COMPASS:VISA:KGS->CARD:COMPASS:MASTERCARD:USD",
-    "operation": {
-      "code": "MAKE_OWN_ACCOUNTS_TRANSFER"
-    },
-    "sender": {
-      "customer_no": "00909471",
-      "account_no": "1280016059312277",
-      "expected": {
-        "currency": "KGS",
-        "account_kind": "CARD",
-        "processor": "COMPASS",
-        "card_system": "VISA"
-      },
-      "card_mask": "417748******0312"
+      "card_mask": "417748******9100"
     },
     "request": {
       "amountDebit": "1.00",
@@ -408,19 +548,19 @@
     },
     "recipient": {
       "customer_no": "00909471",
-      "account_no": "1280016059312176",
+      "account_no": "1280016059311469",
       "expected": {
-        "currency": "USD",
+        "currency": "KGS",
         "account_kind": "CARD",
         "processor": "COMPASS",
-        "card_system": "MASTERCARD"
+        "card_system": "VISA"
       },
-      "card_mask": "526247******0931"
+      "card_mask": "417748******1985"
     },
     "selection_signal": "exact_history"
   },
   {
-    "name": "own_accounts_fx_card_to_card_same_provider_usd_card_compass_c00909471_a1570_to_eur_card_compass_c00909471_a1974",
+    "name": "own_accounts_fx_card_to_card_same_provider__from_417748xxxxxx9100_account_1280016059311570__via_by_account_id__to_526247xxxxxx0127_account_1280016059311974",
     "enabled": true,
     "route_key": "MAKE_OWN_ACCOUNTS_TRANSFER:FX:CARD:COMPASS:VISA:USD->CARD:COMPASS:MASTERCARD:EUR",
     "operation": {
@@ -490,77 +630,7 @@
     "selection_signal": "exact_history"
   },
   {
-    "name": "own_accounts_fx_card_to_card_same_provider_usd_card_compass_c00909471_a1570_to_kgs_card_compass_c00909471_a1469",
-    "enabled": true,
-    "route_key": "MAKE_OWN_ACCOUNTS_TRANSFER:FX:CARD:COMPASS:VISA:USD->CARD:COMPASS:VISA:KGS",
-    "operation": {
-      "code": "MAKE_OWN_ACCOUNTS_TRANSFER"
-    },
-    "sender": {
-      "customer_no": "00909471",
-      "account_no": "1280016059311570",
-      "expected": {
-        "currency": "USD",
-        "account_kind": "CARD",
-        "processor": "COMPASS",
-        "card_system": "VISA"
-      },
-      "card_mask": "417748******9100"
-    },
-    "request": {
-      "amountDebit": "1.00",
-      "paymentPurpose": "Template own accounts fx card to card same_provider"
-    },
-    "verification": {
-      "sender_balance_observable": true,
-      "recipient_balance_observable": true,
-      "statement_fallback_allowed": true,
-      "expected_status_internal": [
-        "ACCEPTED_NOT_PROCESSED",
-        "SUCCESS"
-      ],
-      "expected_status_external": [
-        "IN_PROCESS",
-        "SUCCESS"
-      ],
-      "pass_on_timeout_if_last_status_matches": true,
-      "skip_balance_check_for_processing_state": true
-    },
-    "selection_limit": 2,
-    "force_active": true,
-    "coverage_bucket": "own_accounts_fx_c2c_same_provider_account_id",
-    "preferred_card_used": false,
-    "selection_metadata": {
-      "template_name": "own_accounts_fx_card_to_card_same_provider",
-      "sender_is_default": false,
-      "recipient_is_default": false,
-      "coverage": {
-        "family": "own_accounts",
-        "transfer_mode": "fx",
-        "shape": "c2c",
-        "provider_relation": "same_provider",
-        "credit_addressing_mode": "ACCOUNT_ID"
-      },
-      "coverage_bucket": "own_accounts_fx_c2c_same_provider_account_id",
-      "force_active": true,
-      "preferred_card_used": false,
-      "selection_signal": "exact_history"
-    },
-    "recipient": {
-      "customer_no": "00909471",
-      "account_no": "1280016059311469",
-      "expected": {
-        "currency": "KGS",
-        "account_kind": "CARD",
-        "processor": "COMPASS",
-        "card_system": "VISA"
-      },
-      "card_mask": "417748******1985"
-    },
-    "selection_signal": "exact_history"
-  },
-  {
-    "name": "own_accounts_fx_card_to_card_same_provider_usd_card_compass_c00909471_a1570_to_kgs_card_compass_c00909471_a2075",
+    "name": "own_accounts_fx_card_to_card_same_provider__from_417748xxxxxx9100_account_1280016059311570__via_by_account_id__to_526247xxxxxx0628_account_1280016059312075",
     "enabled": true,
     "route_key": "MAKE_OWN_ACCOUNTS_TRANSFER:FX:CARD:COMPASS:VISA:USD->CARD:COMPASS:MASTERCARD:KGS",
     "operation": {
@@ -630,26 +700,26 @@
     "selection_signal": "exact_history"
   },
   {
-    "name": "own_accounts_fx_card_to_card_same_provider_usd_card_compass_c00909471_a1570_to_kgs_card_compass_c00909471_a2277",
+    "name": "own_accounts_fx_card_to_current__from_417748xxxxxx0312_account_1280016059312277__via_by_account_id__to_account_1280016059315513",
     "enabled": true,
-    "route_key": "MAKE_OWN_ACCOUNTS_TRANSFER:FX:CARD:COMPASS:VISA:USD->CARD:COMPASS:VISA:KGS",
+    "route_key": "MAKE_OWN_ACCOUNTS_TRANSFER:FX:CARD:COMPASS:VISA:KGS->CURRENT:NONE:USD",
     "operation": {
       "code": "MAKE_OWN_ACCOUNTS_TRANSFER"
     },
     "sender": {
       "customer_no": "00909471",
-      "account_no": "1280016059311570",
+      "account_no": "1280016059312277",
       "expected": {
-        "currency": "USD",
+        "currency": "KGS",
         "account_kind": "CARD",
         "processor": "COMPASS",
         "card_system": "VISA"
       },
-      "card_mask": "417748******9100"
+      "card_mask": "417748******0312"
     },
     "request": {
       "amountDebit": "1.00",
-      "paymentPurpose": "Template own accounts fx card to card same_provider"
+      "paymentPurpose": "Template own accounts fx card to current"
     },
     "verification": {
       "sender_balance_observable": true,
@@ -668,39 +738,37 @@
     },
     "selection_limit": 2,
     "force_active": true,
-    "coverage_bucket": "own_accounts_fx_c2c_same_provider_account_id",
+    "coverage_bucket": "own_accounts_fx_c2a_not_applicable_account_id",
     "preferred_card_used": false,
     "selection_metadata": {
-      "template_name": "own_accounts_fx_card_to_card_same_provider",
+      "template_name": "own_accounts_fx_card_to_current",
       "sender_is_default": false,
       "recipient_is_default": false,
       "coverage": {
         "family": "own_accounts",
         "transfer_mode": "fx",
-        "shape": "c2c",
-        "provider_relation": "same_provider",
+        "shape": "c2a",
+        "provider_relation": "not_applicable",
         "credit_addressing_mode": "ACCOUNT_ID"
       },
-      "coverage_bucket": "own_accounts_fx_c2c_same_provider_account_id",
+      "coverage_bucket": "own_accounts_fx_c2a_not_applicable_account_id",
       "force_active": true,
       "preferred_card_used": false,
       "selection_signal": "exact_history"
     },
     "recipient": {
       "customer_no": "00909471",
-      "account_no": "1280016059312277",
+      "account_no": "1280016059315513",
       "expected": {
-        "currency": "KGS",
-        "account_kind": "CARD",
-        "processor": "COMPASS",
-        "card_system": "VISA"
-      },
-      "card_mask": "417748******0312"
+        "currency": "USD",
+        "account_kind": "CURRENT",
+        "processor": "NONE"
+      }
     },
     "selection_signal": "exact_history"
   },
   {
-    "name": "own_accounts_fx_card_to_current_kgs_card_compass_c00909471_a1469_to_usd_current_none_c00909471_a5513",
+    "name": "own_accounts_fx_card_to_current__from_417748xxxxxx1985_account_1280016059311469__via_by_account_id__to_account_1280016059315513",
     "enabled": true,
     "route_key": "MAKE_OWN_ACCOUNTS_TRANSFER:FX:CARD:COMPASS:VISA:KGS->CURRENT:NONE:USD",
     "operation": {
@@ -768,75 +836,7 @@
     "selection_signal": "exact_history"
   },
   {
-    "name": "own_accounts_fx_card_to_current_kgs_card_compass_c00909471_a2277_to_usd_current_none_c00909471_a5513",
-    "enabled": true,
-    "route_key": "MAKE_OWN_ACCOUNTS_TRANSFER:FX:CARD:COMPASS:VISA:KGS->CURRENT:NONE:USD",
-    "operation": {
-      "code": "MAKE_OWN_ACCOUNTS_TRANSFER"
-    },
-    "sender": {
-      "customer_no": "00909471",
-      "account_no": "1280016059312277",
-      "expected": {
-        "currency": "KGS",
-        "account_kind": "CARD",
-        "processor": "COMPASS",
-        "card_system": "VISA"
-      },
-      "card_mask": "417748******0312"
-    },
-    "request": {
-      "amountDebit": "1.00",
-      "paymentPurpose": "Template own accounts fx card to current"
-    },
-    "verification": {
-      "sender_balance_observable": true,
-      "recipient_balance_observable": true,
-      "statement_fallback_allowed": true,
-      "expected_status_internal": [
-        "ACCEPTED_NOT_PROCESSED",
-        "SUCCESS"
-      ],
-      "expected_status_external": [
-        "IN_PROCESS",
-        "SUCCESS"
-      ],
-      "pass_on_timeout_if_last_status_matches": true,
-      "skip_balance_check_for_processing_state": true
-    },
-    "selection_limit": 2,
-    "force_active": true,
-    "coverage_bucket": "own_accounts_fx_c2a_not_applicable_account_id",
-    "preferred_card_used": false,
-    "selection_metadata": {
-      "template_name": "own_accounts_fx_card_to_current",
-      "sender_is_default": false,
-      "recipient_is_default": false,
-      "coverage": {
-        "family": "own_accounts",
-        "transfer_mode": "fx",
-        "shape": "c2a",
-        "provider_relation": "not_applicable",
-        "credit_addressing_mode": "ACCOUNT_ID"
-      },
-      "coverage_bucket": "own_accounts_fx_c2a_not_applicable_account_id",
-      "force_active": true,
-      "preferred_card_used": false,
-      "selection_signal": "exact_history"
-    },
-    "recipient": {
-      "customer_no": "00909471",
-      "account_no": "1280016059315513",
-      "expected": {
-        "currency": "USD",
-        "account_kind": "CURRENT",
-        "processor": "NONE"
-      }
-    },
-    "selection_signal": "exact_history"
-  },
-  {
-    "name": "own_accounts_fx_card_to_current_usd_card_compass_c00909471_a1570_to_kgs_current_none_c00909471_a0964",
+    "name": "own_accounts_fx_card_to_current__from_417748xxxxxx9100_account_1280016059311570__via_by_account_id__to_account_1280016059310964",
     "enabled": true,
     "route_key": "MAKE_OWN_ACCOUNTS_TRANSFER:FX:CARD:COMPASS:VISA:USD->CURRENT:NONE:KGS",
     "operation": {
@@ -879,7 +879,7 @@
     "selection_metadata": {
       "template_name": "own_accounts_fx_card_to_current",
       "sender_is_default": false,
-      "recipient_is_default": true,
+      "recipient_is_default": false,
       "coverage": {
         "family": "own_accounts",
         "transfer_mode": "fx",
@@ -904,7 +904,7 @@
     "selection_signal": "exact_history"
   },
   {
-    "name": "own_accounts_fx_card_to_current_usd_card_compass_c00909471_a1570_to_kgs_current_none_c00909471_a5210",
+    "name": "own_accounts_fx_card_to_current__from_417748xxxxxx9100_account_1280016059311570__via_by_account_id__to_account_1280016059315210",
     "enabled": true,
     "route_key": "MAKE_OWN_ACCOUNTS_TRANSFER:FX:CARD:COMPASS:VISA:USD->CURRENT:NONE:KGS",
     "operation": {
@@ -972,7 +972,143 @@
     "selection_signal": "exact_history"
   },
   {
-    "name": "own_accounts_fx_current_to_card_kgs_current_none_c00909471_a0964_to_eur_card_compass_c00909471_a1974",
+    "name": "own_accounts_fx_current_to_card__from_account_1280016059310964__via_by_account_id__to_417748xxxxxx8335_account_1280016059311368",
+    "enabled": true,
+    "route_key": "MAKE_OWN_ACCOUNTS_TRANSFER:FX:CURRENT:NONE:KGS->CARD:COMPASS:VISA:USD",
+    "operation": {
+      "code": "MAKE_OWN_ACCOUNTS_TRANSFER"
+    },
+    "sender": {
+      "customer_no": "00909471",
+      "account_no": "1280016059310964",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CURRENT",
+        "processor": "NONE"
+      }
+    },
+    "request": {
+      "amountDebit": "1.00",
+      "paymentPurpose": "Template own accounts fx current to card"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "selection_limit": 2,
+    "force_active": true,
+    "coverage_bucket": "own_accounts_fx_a2c_not_applicable_account_id",
+    "preferred_card_used": false,
+    "selection_metadata": {
+      "template_name": "own_accounts_fx_current_to_card",
+      "sender_is_default": false,
+      "recipient_is_default": false,
+      "coverage": {
+        "family": "own_accounts",
+        "transfer_mode": "fx",
+        "shape": "a2c",
+        "provider_relation": "not_applicable",
+        "credit_addressing_mode": "ACCOUNT_ID"
+      },
+      "coverage_bucket": "own_accounts_fx_a2c_not_applicable_account_id",
+      "force_active": true,
+      "preferred_card_used": false,
+      "selection_signal": "exact_history"
+    },
+    "recipient": {
+      "customer_no": "00909471",
+      "account_no": "1280016059311368",
+      "expected": {
+        "currency": "USD",
+        "account_kind": "CARD",
+        "processor": "COMPASS",
+        "card_system": "VISA"
+      },
+      "card_mask": "417748******8335"
+    },
+    "selection_signal": "exact_history"
+  },
+  {
+    "name": "own_accounts_fx_current_to_card__from_account_1280016059310964__via_by_account_id__to_417748xxxxxx9100_account_1280016059311570",
+    "enabled": true,
+    "route_key": "MAKE_OWN_ACCOUNTS_TRANSFER:FX:CURRENT:NONE:KGS->CARD:COMPASS:VISA:USD",
+    "operation": {
+      "code": "MAKE_OWN_ACCOUNTS_TRANSFER"
+    },
+    "sender": {
+      "customer_no": "00909471",
+      "account_no": "1280016059310964",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CURRENT",
+        "processor": "NONE"
+      }
+    },
+    "request": {
+      "amountDebit": "1.00",
+      "paymentPurpose": "Template own accounts fx current to card"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "selection_limit": 2,
+    "force_active": true,
+    "coverage_bucket": "own_accounts_fx_a2c_not_applicable_account_id",
+    "preferred_card_used": false,
+    "selection_metadata": {
+      "template_name": "own_accounts_fx_current_to_card",
+      "sender_is_default": false,
+      "recipient_is_default": false,
+      "coverage": {
+        "family": "own_accounts",
+        "transfer_mode": "fx",
+        "shape": "a2c",
+        "provider_relation": "not_applicable",
+        "credit_addressing_mode": "ACCOUNT_ID"
+      },
+      "coverage_bucket": "own_accounts_fx_a2c_not_applicable_account_id",
+      "force_active": true,
+      "preferred_card_used": false,
+      "selection_signal": "exact_history"
+    },
+    "recipient": {
+      "customer_no": "00909471",
+      "account_no": "1280016059311570",
+      "expected": {
+        "currency": "USD",
+        "account_kind": "CARD",
+        "processor": "COMPASS",
+        "card_system": "VISA"
+      },
+      "card_mask": "417748******9100"
+    },
+    "selection_signal": "exact_history"
+  },
+  {
+    "name": "own_accounts_fx_current_to_card__from_account_1280016059310964__via_by_account_id__to_526247xxxxxx0127_account_1280016059311974",
     "enabled": true,
     "route_key": "MAKE_OWN_ACCOUNTS_TRANSFER:FX:CURRENT:NONE:KGS->CARD:COMPASS:MASTERCARD:EUR",
     "operation": {
@@ -1012,7 +1148,7 @@
     "preferred_card_used": false,
     "selection_metadata": {
       "template_name": "own_accounts_fx_current_to_card",
-      "sender_is_default": true,
+      "sender_is_default": false,
       "recipient_is_default": false,
       "coverage": {
         "family": "own_accounts",
@@ -1040,143 +1176,7 @@
     "selection_signal": "exact_history"
   },
   {
-    "name": "own_accounts_fx_current_to_card_kgs_current_none_c00909471_a0964_to_usd_card_compass_c00909471_a1368",
-    "enabled": true,
-    "route_key": "MAKE_OWN_ACCOUNTS_TRANSFER:FX:CURRENT:NONE:KGS->CARD:COMPASS:VISA:USD",
-    "operation": {
-      "code": "MAKE_OWN_ACCOUNTS_TRANSFER"
-    },
-    "sender": {
-      "customer_no": "00909471",
-      "account_no": "1280016059310964",
-      "expected": {
-        "currency": "KGS",
-        "account_kind": "CURRENT",
-        "processor": "NONE"
-      }
-    },
-    "request": {
-      "amountDebit": "1.00",
-      "paymentPurpose": "Template own accounts fx current to card"
-    },
-    "verification": {
-      "sender_balance_observable": true,
-      "recipient_balance_observable": true,
-      "statement_fallback_allowed": true,
-      "expected_status_internal": [
-        "ACCEPTED_NOT_PROCESSED",
-        "SUCCESS"
-      ],
-      "expected_status_external": [
-        "IN_PROCESS",
-        "SUCCESS"
-      ],
-      "pass_on_timeout_if_last_status_matches": true,
-      "skip_balance_check_for_processing_state": true
-    },
-    "selection_limit": 2,
-    "force_active": true,
-    "coverage_bucket": "own_accounts_fx_a2c_not_applicable_account_id",
-    "preferred_card_used": false,
-    "selection_metadata": {
-      "template_name": "own_accounts_fx_current_to_card",
-      "sender_is_default": true,
-      "recipient_is_default": false,
-      "coverage": {
-        "family": "own_accounts",
-        "transfer_mode": "fx",
-        "shape": "a2c",
-        "provider_relation": "not_applicable",
-        "credit_addressing_mode": "ACCOUNT_ID"
-      },
-      "coverage_bucket": "own_accounts_fx_a2c_not_applicable_account_id",
-      "force_active": true,
-      "preferred_card_used": false,
-      "selection_signal": "exact_history"
-    },
-    "recipient": {
-      "customer_no": "00909471",
-      "account_no": "1280016059311368",
-      "expected": {
-        "currency": "USD",
-        "account_kind": "CARD",
-        "processor": "COMPASS",
-        "card_system": "VISA"
-      },
-      "card_mask": "417748******8335"
-    },
-    "selection_signal": "exact_history"
-  },
-  {
-    "name": "own_accounts_fx_current_to_card_kgs_current_none_c00909471_a0964_to_usd_card_compass_c00909471_a1570",
-    "enabled": true,
-    "route_key": "MAKE_OWN_ACCOUNTS_TRANSFER:FX:CURRENT:NONE:KGS->CARD:COMPASS:VISA:USD",
-    "operation": {
-      "code": "MAKE_OWN_ACCOUNTS_TRANSFER"
-    },
-    "sender": {
-      "customer_no": "00909471",
-      "account_no": "1280016059310964",
-      "expected": {
-        "currency": "KGS",
-        "account_kind": "CURRENT",
-        "processor": "NONE"
-      }
-    },
-    "request": {
-      "amountDebit": "1.00",
-      "paymentPurpose": "Template own accounts fx current to card"
-    },
-    "verification": {
-      "sender_balance_observable": true,
-      "recipient_balance_observable": true,
-      "statement_fallback_allowed": true,
-      "expected_status_internal": [
-        "ACCEPTED_NOT_PROCESSED",
-        "SUCCESS"
-      ],
-      "expected_status_external": [
-        "IN_PROCESS",
-        "SUCCESS"
-      ],
-      "pass_on_timeout_if_last_status_matches": true,
-      "skip_balance_check_for_processing_state": true
-    },
-    "selection_limit": 2,
-    "force_active": true,
-    "coverage_bucket": "own_accounts_fx_a2c_not_applicable_account_id",
-    "preferred_card_used": false,
-    "selection_metadata": {
-      "template_name": "own_accounts_fx_current_to_card",
-      "sender_is_default": true,
-      "recipient_is_default": false,
-      "coverage": {
-        "family": "own_accounts",
-        "transfer_mode": "fx",
-        "shape": "a2c",
-        "provider_relation": "not_applicable",
-        "credit_addressing_mode": "ACCOUNT_ID"
-      },
-      "coverage_bucket": "own_accounts_fx_a2c_not_applicable_account_id",
-      "force_active": true,
-      "preferred_card_used": false,
-      "selection_signal": "exact_history"
-    },
-    "recipient": {
-      "customer_no": "00909471",
-      "account_no": "1280016059311570",
-      "expected": {
-        "currency": "USD",
-        "account_kind": "CARD",
-        "processor": "COMPASS",
-        "card_system": "VISA"
-      },
-      "card_mask": "417748******9100"
-    },
-    "selection_signal": "exact_history"
-  },
-  {
-    "name": "own_accounts_fx_current_to_card_kgs_current_none_c00909471_a0964_to_usd_card_compass_c00909471_a2176",
+    "name": "own_accounts_fx_current_to_card__from_account_1280016059310964__via_by_account_id__to_526247xxxxxx0931_account_1280016059312176",
     "enabled": true,
     "route_key": "MAKE_OWN_ACCOUNTS_TRANSFER:FX:CURRENT:NONE:KGS->CARD:COMPASS:MASTERCARD:USD",
     "operation": {
@@ -1216,7 +1216,7 @@
     "preferred_card_used": false,
     "selection_metadata": {
       "template_name": "own_accounts_fx_current_to_card",
-      "sender_is_default": true,
+      "sender_is_default": false,
       "recipient_is_default": false,
       "coverage": {
         "family": "own_accounts",
@@ -1240,6 +1240,278 @@
         "card_system": "MASTERCARD"
       },
       "card_mask": "526247******0931"
+    },
+    "selection_signal": "exact_history"
+  },
+  {
+    "name": "own_accounts_fx_current_to_card__from_account_1280016059315513__via_by_account_id__to_417748xxxxxx0312_account_1280016059312277",
+    "enabled": true,
+    "route_key": "MAKE_OWN_ACCOUNTS_TRANSFER:FX:CURRENT:NONE:USD->CARD:COMPASS:VISA:KGS",
+    "operation": {
+      "code": "MAKE_OWN_ACCOUNTS_TRANSFER"
+    },
+    "sender": {
+      "customer_no": "00909471",
+      "account_no": "1280016059315513",
+      "expected": {
+        "currency": "USD",
+        "account_kind": "CURRENT",
+        "processor": "NONE"
+      }
+    },
+    "request": {
+      "amountDebit": "1.00",
+      "paymentPurpose": "Template own accounts fx current to card"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "selection_limit": 2,
+    "force_active": true,
+    "coverage_bucket": "own_accounts_fx_a2c_not_applicable_account_id",
+    "preferred_card_used": false,
+    "selection_metadata": {
+      "template_name": "own_accounts_fx_current_to_card",
+      "sender_is_default": false,
+      "recipient_is_default": false,
+      "coverage": {
+        "family": "own_accounts",
+        "transfer_mode": "fx",
+        "shape": "a2c",
+        "provider_relation": "not_applicable",
+        "credit_addressing_mode": "ACCOUNT_ID"
+      },
+      "coverage_bucket": "own_accounts_fx_a2c_not_applicable_account_id",
+      "force_active": true,
+      "preferred_card_used": false,
+      "selection_signal": "exact_history"
+    },
+    "recipient": {
+      "customer_no": "00909471",
+      "account_no": "1280016059312277",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CARD",
+        "processor": "COMPASS",
+        "card_system": "VISA"
+      },
+      "card_mask": "417748******0312"
+    },
+    "selection_signal": "exact_history"
+  },
+  {
+    "name": "own_accounts_fx_current_to_card__from_account_1280016059315513__via_by_account_id__to_417748xxxxxx1985_account_1280016059311469",
+    "enabled": true,
+    "route_key": "MAKE_OWN_ACCOUNTS_TRANSFER:FX:CURRENT:NONE:USD->CARD:COMPASS:VISA:KGS",
+    "operation": {
+      "code": "MAKE_OWN_ACCOUNTS_TRANSFER"
+    },
+    "sender": {
+      "customer_no": "00909471",
+      "account_no": "1280016059315513",
+      "expected": {
+        "currency": "USD",
+        "account_kind": "CURRENT",
+        "processor": "NONE"
+      }
+    },
+    "request": {
+      "amountDebit": "1.00",
+      "paymentPurpose": "Template own accounts fx current to card"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "selection_limit": 2,
+    "force_active": true,
+    "coverage_bucket": "own_accounts_fx_a2c_not_applicable_account_id",
+    "preferred_card_used": false,
+    "selection_metadata": {
+      "template_name": "own_accounts_fx_current_to_card",
+      "sender_is_default": false,
+      "recipient_is_default": false,
+      "coverage": {
+        "family": "own_accounts",
+        "transfer_mode": "fx",
+        "shape": "a2c",
+        "provider_relation": "not_applicable",
+        "credit_addressing_mode": "ACCOUNT_ID"
+      },
+      "coverage_bucket": "own_accounts_fx_a2c_not_applicable_account_id",
+      "force_active": true,
+      "preferred_card_used": false,
+      "selection_signal": "exact_history"
+    },
+    "recipient": {
+      "customer_no": "00909471",
+      "account_no": "1280016059311469",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CARD",
+        "processor": "COMPASS",
+        "card_system": "VISA"
+      },
+      "card_mask": "417748******1985"
+    },
+    "selection_signal": "exact_history"
+  },
+  {
+    "name": "own_accounts_fx_current_to_card__from_account_1280016059315513__via_by_account_id__to_526247xxxxxx0127_account_1280016059311974",
+    "enabled": true,
+    "route_key": "MAKE_OWN_ACCOUNTS_TRANSFER:FX:CURRENT:NONE:USD->CARD:COMPASS:MASTERCARD:EUR",
+    "operation": {
+      "code": "MAKE_OWN_ACCOUNTS_TRANSFER"
+    },
+    "sender": {
+      "customer_no": "00909471",
+      "account_no": "1280016059315513",
+      "expected": {
+        "currency": "USD",
+        "account_kind": "CURRENT",
+        "processor": "NONE"
+      }
+    },
+    "request": {
+      "amountDebit": "1.00",
+      "paymentPurpose": "Template own accounts fx current to card"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "selection_limit": 2,
+    "force_active": true,
+    "coverage_bucket": "own_accounts_fx_a2c_not_applicable_account_id",
+    "preferred_card_used": false,
+    "selection_metadata": {
+      "template_name": "own_accounts_fx_current_to_card",
+      "sender_is_default": false,
+      "recipient_is_default": false,
+      "coverage": {
+        "family": "own_accounts",
+        "transfer_mode": "fx",
+        "shape": "a2c",
+        "provider_relation": "not_applicable",
+        "credit_addressing_mode": "ACCOUNT_ID"
+      },
+      "coverage_bucket": "own_accounts_fx_a2c_not_applicable_account_id",
+      "force_active": true,
+      "preferred_card_used": false,
+      "selection_signal": "exact_history"
+    },
+    "recipient": {
+      "customer_no": "00909471",
+      "account_no": "1280016059311974",
+      "expected": {
+        "currency": "EUR",
+        "account_kind": "CARD",
+        "processor": "COMPASS",
+        "card_system": "MASTERCARD"
+      },
+      "card_mask": "526247******0127"
+    },
+    "selection_signal": "exact_history"
+  },
+  {
+    "name": "own_accounts_fx_current_to_card__from_account_1280016059315513__via_by_account_id__to_526247xxxxxx0628_account_1280016059312075",
+    "enabled": true,
+    "route_key": "MAKE_OWN_ACCOUNTS_TRANSFER:FX:CURRENT:NONE:USD->CARD:COMPASS:MASTERCARD:KGS",
+    "operation": {
+      "code": "MAKE_OWN_ACCOUNTS_TRANSFER"
+    },
+    "sender": {
+      "customer_no": "00909471",
+      "account_no": "1280016059315513",
+      "expected": {
+        "currency": "USD",
+        "account_kind": "CURRENT",
+        "processor": "NONE"
+      }
+    },
+    "request": {
+      "amountDebit": "1.00",
+      "paymentPurpose": "Template own accounts fx current to card"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "selection_limit": 2,
+    "force_active": true,
+    "coverage_bucket": "own_accounts_fx_a2c_not_applicable_account_id",
+    "preferred_card_used": false,
+    "selection_metadata": {
+      "template_name": "own_accounts_fx_current_to_card",
+      "sender_is_default": false,
+      "recipient_is_default": false,
+      "coverage": {
+        "family": "own_accounts",
+        "transfer_mode": "fx",
+        "shape": "a2c",
+        "provider_relation": "not_applicable",
+        "credit_addressing_mode": "ACCOUNT_ID"
+      },
+      "coverage_bucket": "own_accounts_fx_a2c_not_applicable_account_id",
+      "force_active": true,
+      "preferred_card_used": false,
+      "selection_signal": "exact_history"
+    },
+    "recipient": {
+      "customer_no": "00909471",
+      "account_no": "1280016059312075",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CARD",
+        "processor": "COMPASS",
+        "card_system": "MASTERCARD"
+      },
+      "card_mask": "526247******0628"
     },
     "selection_signal": "exact_history"
   }
